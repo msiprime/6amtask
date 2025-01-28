@@ -6,12 +6,12 @@ class DioClient {
 
   DioClient(this._dio) {
     _dio.options = BaseOptions(
-      baseUrl: 'https://stackfood-admin.6amtech.com',
+      baseUrl: 'https://stackfood-admin.6amtech.com/api/v1',
       connectTimeout: const Duration(milliseconds: 5000),
       receiveTimeout: const Duration(milliseconds: 3000),
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
-        'zoneId': '1',
+        'zoneId': '[1]',
         'latitude': '23.735129',
         'longitude': '90.425614',
       },
@@ -21,24 +21,28 @@ class DioClient {
   Future<Response> get(
     String path, {
     Map<String, dynamic>? queryParameters,
+    Map<String, String>? headers,
   }) async {
     try {
-      final url = _dio.options.baseUrl + path;
-      logD('Request URL: $url');
+      logD('Request URL: ${_dio.options.baseUrl + path}');
       logD('Query Parameters: $queryParameters');
 
       final response = await _dio.get(
         path,
         queryParameters: queryParameters,
+        options: Options(headers: headers),
       );
+
+      logD('Response: ${response.data}');
       return response;
     } on DioException catch (dioError) {
-      String errorMessage = _handleDioError(dioError);
+      final errorMessage = _handleDioError(dioError);
       logE('DioException: $errorMessage');
-      throw Exception('Failed to fetch data: $errorMessage');
+      throw DioClientException(
+          message: errorMessage, statusCode: dioError.response?.statusCode);
     } catch (e) {
       logE('Unexpected error: $e');
-      throw Exception('Unexpected error: $e');
+      throw DioClientException(message: 'Unexpected error: $e');
     }
   }
 
@@ -60,4 +64,15 @@ class DioClient {
         return 'Unknown error';
     }
   }
+}
+
+class DioClientException implements Exception {
+  final String message;
+  final int? statusCode;
+
+  DioClientException({required this.message, this.statusCode});
+
+  @override
+  String toString() =>
+      'DioClientException: $message (Status code: $statusCode)';
 }

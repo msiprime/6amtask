@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:android_id/android_id.dart';
 import 'package:bloc/bloc.dart';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:stackfood/core/global/logger/app_logger.dart';
 
@@ -47,8 +48,17 @@ class AppMetaDataCubit extends Cubit<AppMetaDataState> {
 
     try {
       final deviceId = await _getDeviceId();
-      final osType = Platform.operatingSystem;
-      final osVersion = Platform.operatingSystemVersion;
+
+      String osType = '';
+      String osVersion = '';
+
+      if (kIsWeb) {
+        osType = 'Web';
+        osVersion = 'N/A';
+      } else {
+        osType = Platform.operatingSystem;
+        osVersion = Platform.operatingSystemVersion;
+      }
 
       final packageInfo = await PackageInfo.fromPlatform();
       final appVersion = packageInfo.version;
@@ -80,9 +90,13 @@ class AppMetaDataCubit extends Cubit<AppMetaDataState> {
   /// Returns the device unique id for iOS and Android platforms.
   /// Returns null if the platform is not supported or if the ID can't be
   /// determined.
+
   Future<String?> _getDeviceId() async {
     final deviceInfo = DeviceInfoPlugin();
-    if (Platform.isIOS) {
+
+    if (kIsWeb) {
+      return null;
+    } else if (Platform.isIOS) {
       return (await deviceInfo.iosInfo).identifierForVendor;
     } else if (Platform.isAndroid) {
       return const AndroidId().getId();

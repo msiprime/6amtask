@@ -1,1 +1,7 @@
-abstract interface class HomeRepository {}
+import 'package:fpdart/fpdart.dart';
+import 'package:stackfood/core/global/exception/failures.dart';
+import 'package:stackfood/features/home/domain/entity/banner_entity.dart';
+
+abstract interface class HomeRepository {
+  Future<Either<Failure, List<BannerEntity>>> getHomeBanners();
+}

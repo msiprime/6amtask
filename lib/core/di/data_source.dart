@@ -2,6 +2,6 @@ part of 'injection_container.dart';
 
 Future<void> _initDataSources() async {
   sl.registerFactory(
-    () => HomeDatasourceImpl(),
+    () => HomeDataSourceImpl(dioClient: sl.get<DioClient>()),
   );
 }

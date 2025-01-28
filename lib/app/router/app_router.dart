@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stackfood/app/router/nav_bar.dart';
@@ -94,13 +95,17 @@ GoRoute _buildErrorScreenRoute() => GoRoute(
     );
 
 Page<T> _getPageByPlatform<T>({required Widget child}) {
-  if (Platform.isAndroid) {
+  if (kIsWeb) {
+    return MaterialPage(child: child);
+  } else {
+    if (Platform.isAndroid) {
+      return MaterialPage(child: child);
+    }
+    if (Platform.isIOS) {
+      return CupertinoPage(child: child);
+    }
     return MaterialPage(child: child);
   }
-  if (Platform.isIOS) {
-    return CupertinoPage(child: child);
-  }
-  return MaterialPage(child: child);
 }
 
 GoRouterPageBuilder _getDefaultPageBuilderByPlatform({
