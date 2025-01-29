@@ -38,6 +38,7 @@ class AppCarouselSlider extends StatelessWidget {
                 borderRadius: BorderRadius.circular(radius),
                 child: RepaintBoundary(
                   child: CustomImageWidget(
+                    scale: 1,
                     imageUrl: imageUrls[index],
                     fit: BoxFit.fitWidth,
                   ),

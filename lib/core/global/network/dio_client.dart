@@ -7,8 +7,8 @@ class DioClient {
   DioClient(this._dio) {
     _dio.options = BaseOptions(
       baseUrl: 'https://stackfood-admin.6amtech.com/api/v1',
-      connectTimeout: const Duration(milliseconds: 5000),
-      receiveTimeout: const Duration(milliseconds: 3000),
+      connectTimeout: const Duration(milliseconds: 30000),
+      receiveTimeout: const Duration(milliseconds: 30000),
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
         'zoneId': '[1]',

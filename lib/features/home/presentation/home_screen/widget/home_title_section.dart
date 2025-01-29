@@ -23,8 +23,9 @@ class HomeTitleSectionWithViewAll extends StatelessWidget {
         children: [
           Text(
             title,
-            style: context.theme.textTheme.titleLarge?.copyWith(
-              fontWeight: FontWeight.w500,
+            style: context.theme.textTheme.titleMedium?.copyWith(
+              fontWeight: FontWeight.w600,
+              fontSize: 18,
             ),
           ),
           // todo: dynamic Colors / app colors
@@ -41,7 +42,7 @@ class HomeTitleSectionWithViewAll extends StatelessWidget {
                 color: Colors.green,
                 decoration: TextDecoration.underline,
                 decorationColor: Colors.green,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w500,
               ),
             ),
           ),

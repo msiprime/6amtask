@@ -27,18 +27,14 @@ class HomeCarouselView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeBannerCubit, HomeBannerState>(
       builder: (context, state) {
-        if (state is BannerInitial) {
-          return const Center(
-            child: CircularProgressIndicator.adaptive(),
-          );
-        } else if (state is BannerLoading) {
+        if (state is BannerInitial || state is BannerLoading) {
           return const Center(
             child: CircularProgressIndicator.adaptive(),
           );
         } else if (state is BannerLoaded) {
           return AppCarouselSlider(
             imageUrls: state.banners.map((e) => e.imageUrl).toList(),
-            height: context.screenHeight * 0.16,
+            height: context.screenHeight * 0.17,
           );
         } else if (state is BannerError) {
           return Center(
@@ -46,7 +42,7 @@ class HomeCarouselView extends StatelessWidget {
           );
         }
         return const Center(
-          child: CircularProgressIndicator(),
+          child: CircularProgressIndicator.adaptive(),
         );
       },
     );

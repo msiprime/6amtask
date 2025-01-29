@@ -23,8 +23,12 @@ class CustomImageWidget extends StatelessWidget {
     this.withPlaceholder = true,
     this.withAdaptiveColors = true,
     this.borderRadius,
+    this.scale = 1.0,
     this.errorBuilder = _defaultErrorBuilder,
   });
+
+  /// The scale of the image.
+  final double scale;
 
   /// The image url to show.
   final String imageUrl;
@@ -87,6 +91,7 @@ class CustomImageWidget extends StatelessWidget {
     final height = this.height;
 
     return NetworkImageAttachment(
+      scale: scale,
       url: imageUrl,
       fit: fit,
       width: width,
@@ -117,9 +122,11 @@ class NetworkImageAttachment extends StatelessWidget {
     required this.memCacheHeight,
     required this.resizeHeight,
     required this.resizeWidth,
+    required this.scale,
     super.key,
   });
 
+  final double scale;
   final String url;
   final double? width;
   final double? height;
@@ -136,6 +143,7 @@ class NetworkImageAttachment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CachedNetworkImage(
+      scale: scale,
       imageUrl: url,
       cacheKey: url,
       memCacheHeight: memCacheHeight,
