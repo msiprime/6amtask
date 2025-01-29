@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stackfood/features/home/presentation/banner/view/carousel_view.dart';
+import 'package:stackfood/features/home/presentation/categories/view/category_item_view.dart';
+import 'package:stackfood/features/home/presentation/home_screen/widget/home_title_section.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -29,6 +31,15 @@ class HomeViewState extends State<HomeView> {
         ),
         SliverToBoxAdapter(
           child: HomeCarouselSection(),
+        ),
+        SliverToBoxAdapter(
+          child: HomeTitleSectionWithViewAll(
+            title: 'Categories',
+            onViewAllTap: () {},
+          ),
+        ),
+        SliverToBoxAdapter(
+          child: CategoryItemSection(),
         )
       ],
     );

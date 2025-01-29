@@ -4,7 +4,7 @@ import 'package:stackfood/core/di/injection_container.dart';
 import 'package:stackfood/core/global/extension/context_extension.dart';
 import 'package:stackfood/core/global/widgets/app_carousel.dart';
 import 'package:stackfood/features/home/data/repository/home_repo_impl.dart';
-import 'package:stackfood/features/home/presentation/banner/cubit/banner_cubit.dart';
+import 'package:stackfood/features/home/presentation/banner/cubit/home_banner_cubit.dart';
 
 class HomeCarouselSection extends StatelessWidget {
   const HomeCarouselSection({super.key});
@@ -12,7 +12,7 @@ class HomeCarouselSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => BannerCubit(
+      create: (context) => HomeBannerCubit(
         homeRepository: sl.get<HomeRepositoryImpl>(),
       )..getBanners(),
       child: HomeCarouselView(),
@@ -25,7 +25,7 @@ class HomeCarouselView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<BannerCubit, BannerState>(
+    return BlocBuilder<HomeBannerCubit, HomeBannerState>(
       builder: (context, state) {
         if (state is BannerInitial) {
           return const Center(

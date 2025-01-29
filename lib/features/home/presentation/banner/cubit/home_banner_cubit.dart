@@ -3,12 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stackfood/features/home/domain/entity/banner_entity.dart';
 import 'package:stackfood/features/home/domain/repository/home_repo.dart';
 
-part 'banner_state.dart';
+part 'home_banner_state.dart';
 
-class BannerCubit extends Cubit<BannerState> {
+class HomeBannerCubit extends Cubit<HomeBannerState> {
   final HomeRepository _homeRepository;
 
-  BannerCubit({
+  HomeBannerCubit({
     required HomeRepository homeRepository,
   })  : _homeRepository = homeRepository,
         super(BannerInitial());

@@ -1,20 +1,20 @@
-part of 'banner_cubit.dart';
+part of 'home_banner_cubit.dart';
 
-sealed class BannerState extends Equatable {
-  const BannerState();
+sealed class HomeBannerState extends Equatable {
+  const HomeBannerState();
 }
 
-final class BannerInitial extends BannerState {
+final class BannerInitial extends HomeBannerState {
   @override
   List<Object> get props => [];
 }
 
-final class BannerLoading extends BannerState {
+final class BannerLoading extends HomeBannerState {
   @override
   List<Object> get props => [];
 }
 
-final class BannerLoaded extends BannerState {
+final class BannerLoaded extends HomeBannerState {
   final List<BannerEntity> banners;
 
   const BannerLoaded(this.banners);
@@ -23,7 +23,7 @@ final class BannerLoaded extends BannerState {
   List<Object> get props => [banners];
 }
 
-final class BannerError extends BannerState {
+final class BannerError extends HomeBannerState {
   final String message;
 
   const BannerError(this.message);
