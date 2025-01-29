@@ -48,7 +48,7 @@ class HomeDataSourceImpl implements HomeDataSource {
   @override
   Future<Response> getHomeFoodCampaigns() async {
     final response = await _dioClient.get(
-      '/food-campaigns',
+      '/campaigns/item',
     );
 
     return response;

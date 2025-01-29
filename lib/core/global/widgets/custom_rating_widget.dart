@@ -16,7 +16,7 @@ class RatingStars extends StatelessWidget {
     required this.rating,
     this.filledColor = Colors.green,
     this.emptyColor = Colors.grey,
-    this.size = 24.0,
+    this.size = 18.0,
   });
 
   @override
