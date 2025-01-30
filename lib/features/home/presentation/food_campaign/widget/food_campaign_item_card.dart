@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:stackfood/core/global/constants/app_size.dart';
 import 'package:stackfood/core/global/constants/app_spacing.dart';
 import 'package:stackfood/core/global/extension/context_extension.dart';
+import 'package:stackfood/core/global/theme/app_colors.dart';
+import 'package:stackfood/core/global/widgets/app_text_widget.dart';
 import 'package:stackfood/core/global/widgets/custom_rating_widget.dart';
 import 'package:stackfood/core/global/widgets/image_thumbnail.dart';
 import 'package:stackfood/features/home/domain/entity/campaign_entity.dart';
@@ -21,7 +23,7 @@ class FoodCampaignItemCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(AppSpacing.md),
         ),
         elevation: 0,
-        color: Colors.white,
+        color: AppColors.white,
         child: Row(
           children: [
             _ImageAndDiscountPart(campaign: campaign),
@@ -33,18 +35,16 @@ class FoodCampaignItemCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               spacing: AppSpacing.xxs,
               children: [
-                Text(
+                AppText(
                   campaign.name,
-                  style: context.theme.textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w500,
-                  ),
+                  style: AppTextStyle.titleMedium,
+                  fontWeight: FontWeight.w500,
                   overflow: TextOverflow.fade,
                 ),
-                Text(
+                AppText(
                   campaign.restaurantName,
-                  style: context.theme.textTheme.titleSmall?.copyWith(
-                    color: Colors.grey,
-                  ),
+                  style: AppTextStyle.titleSmall,
+                  color: AppColors.grey,
                   overflow: TextOverflow.fade,
                 ),
                 RatingStars(rating: campaign.averageRating),
@@ -73,19 +73,18 @@ class _PriceAndAddToCartPart extends StatelessWidget {
         Row(
           children: [
             /// We could make it double, (AS PER UI, I am keeping it as it is)
-            Text(
+
+            AppText(
               '\$ ${campaign.getDiscountedPrice().toStringAsFixed(0)}',
-              style: context.theme.textTheme.titleSmall?.copyWith(
-                fontWeight: FontWeight.w500,
-              ),
+              style: AppTextStyle.titleSmall,
+              fontWeight: FontWeight.w500,
             ),
-            const SizedBox(width: 6),
-            Text(
-              '\$ ${campaign.price.toStringAsFixed(0)}',
-              style: context.theme.textTheme.titleSmall?.copyWith(
-                color: Colors.grey,
-                decoration: TextDecoration.lineThrough,
-              ),
+            const SizedBox(width: AppSpacing.md),
+            AppText(
+              '(${campaign.price.toStringAsFixed(0)})',
+              style: AppTextStyle.titleSmall,
+              color: AppColors.grey,
+              decoration: TextDecoration.lineThrough,
             ),
           ],
         ),

@@ -7,8 +7,8 @@ import 'package:go_router/go_router.dart';
 import 'package:stackfood/app/router/nav_bar.dart';
 import 'package:stackfood/core/global/widgets/error_screen.dart';
 import 'package:stackfood/features/base/pages/splash_screen.dart';
-import 'package:stackfood/features/favorite/presentation/favorite_screen.dart';
 import 'package:stackfood/features/home/presentation/home_screen/view/home_screen.dart';
+import 'package:stackfood/features/random/favorite_screen.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>(
   debugLabel: '_rootNavigatorKey',

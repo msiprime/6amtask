@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:stackfood/core/global/constants/app_spacing.dart';
+import 'package:stackfood/core/global/constants/app_strings.dart';
 import 'package:stackfood/features/home/presentation/banner/view/carousel_view.dart';
 import 'package:stackfood/features/home/presentation/categories/view/category_item_view.dart';
 import 'package:stackfood/features/home/presentation/food_campaign/view/food_campaign_view.dart';
@@ -50,14 +51,14 @@ class HomeViewState extends State<HomeView> {
         body: CustomScrollView(
           controller: _scrollController,
           slivers: [
-            const TopHomeAppBar(),
-            const SliverGap(AppSpacing.xxs),
+            const HomeAppBar(),
+            const SliverGap(AppSpacing.md),
             const SliverToBoxAdapter(
               child: HomeCarouselSection(),
             ),
             SliverToBoxAdapter(
               child: HomeTitleSectionWithViewAll(
-                title: 'Categories',
+                title: AppStrings.categories,
                 onViewAllTap: () {},
               ),
             ),
@@ -68,7 +69,7 @@ class HomeViewState extends State<HomeView> {
             const SliverGap(AppSpacing.sm),
             SliverToBoxAdapter(
               child: HomeTitleSectionWithViewAll(
-                title: 'Popular Food Nearby',
+                title: AppStrings.popularFoodNearBy,
                 onViewAllTap: () {},
               ),
             ),
@@ -79,7 +80,7 @@ class HomeViewState extends State<HomeView> {
             const SliverGap(AppSpacing.md),
             SliverToBoxAdapter(
               child: HomeTitleSectionWithViewAll(
-                title: 'Food Campaign',
+                title: AppStrings.foodCampaign,
                 onViewAllTap: () {},
               ),
             ),
@@ -90,7 +91,7 @@ class HomeViewState extends State<HomeView> {
             const SliverGap(AppSpacing.md),
             SliverToBoxAdapter(
               child: HomeTitleSectionWithViewAll(
-                title: 'Restaurants',
+                title: AppStrings.restaurants,
                 onViewAllTap: () {},
               ),
             ),

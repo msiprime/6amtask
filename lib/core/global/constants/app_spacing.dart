@@ -29,4 +29,10 @@ abstract class AppSpacing {
 
   /// xxxlg pacing value (64pt)
   static const double xxxlg = 4 * spaceUnit;
+
+  /// custom spacing value
+  static const double custom10 = 10;
+
+  /// custom spacing value
+  static const double custom20 = 20;
 }

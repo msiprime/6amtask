@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stackfood/core/di/injection_container.dart';
+import 'package:stackfood/core/global/constants/app_spacing.dart';
+import 'package:stackfood/core/global/constants/app_strings.dart';
 import 'package:stackfood/core/global/theme/app_colors.dart';
 import 'package:stackfood/features/home/data/repository/home_repo_impl.dart';
 import 'package:stackfood/features/home/presentation/restaurant/cubit/restaurant_home_cubit.dart';
@@ -68,7 +70,8 @@ class RestaurantHomeCardViewState extends State<RestaurantHomeCardView> {
               (context, index) {
                 if (index == restaurants.length && !state.hasReachedMax) {
                   return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: AppSpacing.custom20),
                     child: Center(
                       child: CircularProgressIndicator(
                         color: AppColors.orange,
@@ -78,7 +81,8 @@ class RestaurantHomeCardViewState extends State<RestaurantHomeCardView> {
                 }
 
                 return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: AppSpacing.custom10),
                   child: RestaurantItemCard(restaurant: restaurants[index]),
                 );
               },
@@ -95,7 +99,7 @@ class RestaurantHomeCardViewState extends State<RestaurantHomeCardView> {
                 onPressed: () {
                   context.read<RestaurantHomeCubit>().getRestaurants();
                 },
-                label: Text("Retry"),
+                label: Text(AppStrings.retry),
                 icon: Icon(Icons.refresh_sharp),
               ),
             ),

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:stackfood/core/global/extension/context_extension.dart';
+import 'package:stackfood/core/global/constants/app_spacing.dart';
+import 'package:stackfood/core/global/constants/app_strings.dart';
+import 'package:stackfood/core/global/theme/app_colors.dart';
+import 'package:stackfood/core/global/widgets/app_text_widget.dart';
 
 class HomeTitleSectionWithViewAll extends StatelessWidget {
   final String title;
@@ -13,22 +16,18 @@ class HomeTitleSectionWithViewAll extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // todo: dynamic padding
     return Padding(
       /// Since Material Widget takes 8 gap by default, I subtracted 8 from the right side.
-      padding: const EdgeInsets.only(left: 12, right: 4),
+      padding: const EdgeInsets.only(left: AppSpacing.md, right: AppSpacing.xs),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
+          AppText(
             title,
-            style: context.theme.textTheme.titleMedium?.copyWith(
-              fontWeight: FontWeight.w600,
-              fontSize: 18,
-            ),
+            style: AppTextStyle.titleMedium,
+            fontWeight: FontWeight.w600,
           ),
-          // todo: dynamic Colors / app colors
           TextButton(
             style: TextButton.styleFrom(
               visualDensity: VisualDensity.compact,
@@ -36,14 +35,13 @@ class HomeTitleSectionWithViewAll extends StatelessWidget {
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
             ),
             onPressed: onViewAllTap,
-            child: Text(
-              'View All',
-              style: context.theme.textTheme.titleMedium?.copyWith(
-                color: Colors.green,
-                decoration: TextDecoration.underline,
-                decorationColor: Colors.green,
-                fontWeight: FontWeight.w500,
-              ),
+            child: AppText(
+              AppStrings.viewAll,
+              color: AppColors.green,
+              fontWeight: FontWeight.w500,
+              style: AppTextStyle.titleMedium,
+              decoration: TextDecoration.underline,
+              decorationColor: AppColors.green,
             ),
           ),
         ],
