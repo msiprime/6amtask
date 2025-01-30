@@ -1,7 +1,9 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:stackfood/core/global/extension/context_extension.dart';
 import 'package:stackfood/core/global/widgets/shimmer_placeholder.dart';
 import 'package:stackfood/core/global/widgets/thumbnail_error.dart';
 
@@ -142,51 +144,86 @@ class NetworkImageAttachment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CachedNetworkImage(
-      scale: scale,
-      imageUrl: url,
-      cacheKey: url,
-      memCacheHeight: memCacheHeight,
-      memCacheWidth: memCacheWidth,
-      imageBuilder: (context, imageProvider) {
-        return Container(
-          height: height,
-          width: width,
-          decoration: BoxDecoration(
+    if (kIsWeb || kIsWasm || !context.isMobile) {
+      return Image.network(
+        url,
+        scale: scale,
+        fit: fit,
+        width: width,
+        height: height,
+        errorBuilder: (context, error, stackTrace) {
+          return errorBuilder(
+            context,
+            error,
+            stackTrace,
+            height: height,
+            width: width,
             borderRadius: borderRadius,
-            image: DecorationImage(
-              image: resizeHeight == null && resizeWidth == null
-                  ? imageProvider
-                  : ResizeImage(
-                      imageProvider,
-                      width: resizeWidth,
-                      height: resizeHeight,
-                    ),
-              fit: fit,
-            ),
-          ),
-        );
-      },
-      placeholder: !withPlaceholder
-          ? null
-          : (context, __) => ShimmerPlaceholder.rectangle(
-                height: height,
-                width: width,
-                highlightColorLight: Colors.grey[300],
-                baseColorLight: Colors.grey[100],
-                withAdaptiveColors: withAdaptiveColors,
-                borderRadius: borderRadius,
+          );
+        },
+        cacheHeight: memCacheHeight,
+        cacheWidth: memCacheWidth,
+        loadingBuilder: (context, child, loadingProgress) {
+          if (loadingProgress == null) {
+            return child;
+          }
+          return ShimmerPlaceholder.rectangle(
+            height: height,
+            width: width,
+            highlightColorLight: Colors.grey[300],
+            baseColorLight: Colors.grey[100],
+            withAdaptiveColors: withAdaptiveColors,
+            borderRadius: borderRadius,
+          );
+        },
+      );
+    } else {
+      return CachedNetworkImage(
+        scale: scale,
+        imageUrl: url,
+        cacheKey: url,
+        memCacheHeight: memCacheHeight,
+        memCacheWidth: memCacheWidth,
+        imageBuilder: (context, imageProvider) {
+          return Container(
+            height: height,
+            width: width,
+            decoration: BoxDecoration(
+              borderRadius: borderRadius,
+              image: DecorationImage(
+                image: resizeHeight == null && resizeWidth == null
+                    ? imageProvider
+                    : ResizeImage(
+                        imageProvider,
+                        width: resizeWidth,
+                        height: resizeHeight,
+                      ),
+                fit: fit,
               ),
-      errorWidget: (context, url, error) {
-        return errorBuilder(
-          context,
-          error,
-          StackTrace.current,
-          height: height,
-          width: width,
-          borderRadius: borderRadius,
-        );
-      },
-    );
+            ),
+          );
+        },
+        placeholder: !withPlaceholder
+            ? null
+            : (context, __) => ShimmerPlaceholder.rectangle(
+                  height: height,
+                  width: width,
+                  highlightColorLight: Colors.grey[300],
+                  baseColorLight: Colors.grey[100],
+                  withAdaptiveColors: withAdaptiveColors,
+                  borderRadius: borderRadius,
+                ),
+        errorWidget: (context, url, error) {
+          return errorBuilder(
+            context,
+            error,
+            StackTrace.current,
+            height: height,
+            width: width,
+            borderRadius: borderRadius,
+          );
+        },
+      );
+    }
   }
 }
