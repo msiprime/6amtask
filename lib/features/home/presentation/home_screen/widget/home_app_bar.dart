@@ -100,10 +100,15 @@ class _TopHeaderAppBarSection extends StatelessWidget {
           children: [
             const Icon(Icons.home, color: Colors.grey),
             const SizedBox(width: 8),
-            AppText(
-              "76A eighth avenue, New York, US",
-              style: AppTextStyle.titleSmall,
-              color: context.theme.dividerColor.withOpacity(0.6),
+            SizedBox(
+              width: context.screenWidth * 0.5,
+              child: AppText(
+                "76A eighth avenue, New York, US",
+                style: AppTextStyle.titleSmall,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+                color: context.theme.dividerColor.withOpacity(0.6),
+              ),
             ),
           ],
         ),

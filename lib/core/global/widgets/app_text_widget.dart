@@ -89,6 +89,7 @@ class AppText extends StatelessWidget {
   final TextDecoration? decoration;
   final Color? decorationColor;
   final double? fontSize;
+  final bool? softWrap;
 
   const AppText(
     this.text, {
@@ -102,6 +103,7 @@ class AppText extends StatelessWidget {
     this.overflow = TextOverflow.ellipsis,
     this.decoration = TextDecoration.none,
     this.decorationColor,
+    this.softWrap,
   });
 
   @override
@@ -110,6 +112,7 @@ class AppText extends StatelessWidget {
 
     return Text(
       text,
+      softWrap: softWrap,
       style: baseStyle.copyWith(
         fontSize: fontSize ?? baseStyle.fontSize,
         color: color ?? Theme.of(context).colorScheme.onSurface,

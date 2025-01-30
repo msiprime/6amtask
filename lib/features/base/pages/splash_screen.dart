@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stackfood/core/di/injection_container.dart';
+import 'package:stackfood/core/global/extension/context_extension.dart';
 import 'package:stackfood/core/global/widgets/error_screen.dart';
 import 'package:stackfood/features/base/bloc/app_meta_data_cubit/app_meta_data_cubit.dart';
 import 'package:stackfood/features/home/presentation/home_screen/view/home_screen.dart';
@@ -57,8 +58,10 @@ class SplashWelcomeView extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.8,
+                ConstrainedBox(
+                  constraints: context.isDesktop
+                      ? const BoxConstraints(maxWidth: 300, maxHeight: 300)
+                      : const BoxConstraints(maxWidth: 200, maxHeight: 200),
                   child: AspectRatio(
                     aspectRatio: 1,
                     child: SvgPicture.string(
