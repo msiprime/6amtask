@@ -6,6 +6,7 @@ import 'package:stackfood/features/home/presentation/categories/view/category_it
 import 'package:stackfood/features/home/presentation/food_campaign/view/food_campaign_view.dart';
 import 'package:stackfood/features/home/presentation/home_screen/widget/home_title_section.dart';
 import 'package:stackfood/features/home/presentation/popular_food/view/popular_food_view.dart';
+import 'package:stackfood/features/home/presentation/restaurant/view/restaurant_home_view.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -67,7 +68,16 @@ class HomeViewState extends State<HomeView> {
         SliverGap(AppSpacing.md),
         SliverToBoxAdapter(
           child: FoodCampaignSection(),
-        )
+        ),
+        SliverGap(AppSpacing.md),
+        SliverToBoxAdapter(
+          child: HomeTitleSectionWithViewAll(
+            title: 'Restaurants',
+            onViewAllTap: () {},
+          ),
+        ),
+        SliverGap(AppSpacing.md),
+        RestaurantHomeSection()
       ],
     );
   }

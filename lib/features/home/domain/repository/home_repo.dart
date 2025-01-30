@@ -4,6 +4,7 @@ import 'package:stackfood/features/home/domain/entity/banner_entity.dart';
 import 'package:stackfood/features/home/domain/entity/campaign_entity.dart';
 import 'package:stackfood/features/home/domain/entity/category_entity.dart';
 import 'package:stackfood/features/home/domain/entity/popular_product_entity.dart';
+import 'package:stackfood/features/home/domain/entity/restaurant_entity.dart';
 
 abstract interface class HomeRepository {
   /// Get home banners
@@ -17,4 +18,7 @@ abstract interface class HomeRepository {
 
   /// Get Food Campaigns
   Future<Either<Failure, List<CampaignEntity>>> getFoodCampaigns();
+
+  /// Get Restaurants
+  Future<Either<Failure, List<RestaurantEntity>>> getRestaurants();
 }
