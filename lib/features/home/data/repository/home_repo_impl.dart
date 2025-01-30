@@ -126,9 +126,15 @@ class HomeRepositoryImpl implements HomeRepository {
   }
 
   @override
-  Future<Either<Failure, List<RestaurantEntity>>> getRestaurants() async {
+  Future<Either<Failure, List<RestaurantEntity>>> getRestaurants({
+    required int offset,
+    required int limit,
+  }) async {
     try {
-      final response = await _homeDataSource.getHomeRestaurants();
+      final response = await _homeDataSource.getHomeRestaurants(
+        offset: offset,
+        limit: limit,
+      );
 
       if (response.statusCode == 200) {
         final data = response.data as Map<String, dynamic>;

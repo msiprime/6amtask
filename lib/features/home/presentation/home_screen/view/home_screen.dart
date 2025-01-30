@@ -27,9 +27,24 @@ class HomeView extends StatefulWidget {
 }
 
 class HomeViewState extends State<HomeView> {
+  late ScrollController _scrollController;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
+      controller: _scrollController,
       slivers: [
         SliverAppBar(
           title: Text('Home'),
@@ -77,7 +92,11 @@ class HomeViewState extends State<HomeView> {
           ),
         ),
         SliverGap(AppSpacing.md),
-        RestaurantHomeSection()
+        RestaurantHomeSection(scrollController: _scrollController),
+        SliverGap(AppSpacing.md),
+        SliverGap(AppSpacing.md),
+        SliverGap(AppSpacing.md),
+        SliverGap(AppSpacing.md),
       ],
     );
   }

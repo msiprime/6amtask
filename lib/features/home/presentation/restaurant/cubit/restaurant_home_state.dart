@@ -1,40 +1,40 @@
 part of 'restaurant_home_cubit.dart';
 
 @immutable
-sealed class RestaurantHomeState extends Equatable {
-  const RestaurantHomeState();
-}
+sealed class RestaurantHomeState extends Equatable {}
 
 final class RestaurantHomeInitial extends RestaurantHomeState {
-  const RestaurantHomeInitial();
-
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
-final class RestaurantHomeLoading extends RestaurantHomeState {
+class RestaurantHomeLoading extends RestaurantHomeState {
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
-final class RestaurantHomeLoaded extends RestaurantHomeState {
+class RestaurantHomeLoaded extends RestaurantHomeState {
   final List<RestaurantEntity> restaurants;
+  final bool hasReachedMax;
+  final bool isLoading;
 
-  const RestaurantHomeLoaded({
+  RestaurantHomeLoaded({
     required this.restaurants,
+    required this.hasReachedMax,
+    this.isLoading = false,
   });
 
   @override
-  List<Object> get props => [restaurants];
+  List<Object?> get props => [restaurants, hasReachedMax, isLoading];
 }
 
-final class RestaurantHomeError extends RestaurantHomeState {
+class RestaurantHomeError extends RestaurantHomeState {
   final String message;
 
-  const RestaurantHomeError({
+  RestaurantHomeError({
     required this.message,
   });
 
   @override
-  List<Object> get props => [message];
+  List<Object?> get props => [message];
 }

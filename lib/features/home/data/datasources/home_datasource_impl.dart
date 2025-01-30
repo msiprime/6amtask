@@ -56,8 +56,8 @@ class HomeDataSourceImpl implements HomeDataSource {
 
   @override
   Future<Response> getHomeRestaurants({
-    int? offset = 1,
-    int? limit = 10,
+    required int offset,
+    required int limit,
   }) async {
     final response = await _dioClient.get(
         '/restaurants/get-restaurants/all?offset=1&limit=10',

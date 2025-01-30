@@ -9,5 +9,8 @@ abstract interface class HomeDataSource {
 
   Future<Response> getHomeFoodCampaigns();
 
-  Future<Response> getHomeRestaurants();
+  Future<Response> getHomeRestaurants({
+    required int offset,
+    required int limit,
+  });
 }
