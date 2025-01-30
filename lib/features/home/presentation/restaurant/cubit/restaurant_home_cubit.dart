@@ -25,10 +25,9 @@ class RestaurantHomeCubit extends Cubit<RestaurantHomeState> {
 
     if (currentState is RestaurantHomeLoaded) {
       oldRestaurants = currentState.restaurants;
-      if (currentState.hasReachedMax) return; // Don't fetch if max reached
+      if (currentState.hasReachedMax) return;
     }
 
-    // Emit a loading state if it's a pagination request
     emit(RestaurantHomeLoaded(
       restaurants: oldRestaurants,
       hasReachedMax: false,
@@ -55,7 +54,6 @@ class RestaurantHomeCubit extends Cubit<RestaurantHomeState> {
           _currentPage++;
           final hasReachedMax = restaurants.length < _limit;
 
-          // Emit loaded state with paginated data
           emit(RestaurantHomeLoaded(
             restaurants: oldRestaurants + restaurants,
             hasReachedMax: hasReachedMax,

@@ -1,5 +1,6 @@
 part of 'home_banner_cubit.dart';
 
+@immutable
 sealed class HomeBannerState extends Equatable {
   const HomeBannerState();
 }

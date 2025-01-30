@@ -18,23 +18,21 @@ extension BuildContextX on BuildContext {
   bool get isDark => !isLight;
 
   /// Defines an adaptive [Color], depending on current theme brightness.
-  Color get adaptiveColor =>
-      isDark ? AppColorsTheme.white : AppColorsTheme.black;
+  Color get adaptiveColor => isDark ? AppColors.white : AppColors.black;
 
   /// Defines a reversed adaptive [Color], depending on current theme
   /// brightness.
-  Color get reversedAdaptiveColor =>
-      isDark ? AppColorsTheme.black : AppColorsTheme.white;
+  Color get reversedAdaptiveColor => isDark ? AppColors.black : AppColors.white;
 
   /// Defines a customizable adaptive [Color]. If [light] or [dark] is not
   /// provided default colors are used.
   Color customAdaptiveColor({Color? light, Color? dark}) =>
-      isDark ? (light ?? AppColorsTheme.white) : (dark ?? AppColorsTheme.black);
+      isDark ? (light ?? AppColors.white) : (dark ?? AppColors.black);
 
   /// Defines a customizable reversed adaptive [Color]. If [light] or [dark]
   /// is not provided default reversed colors are used.
   Color customReversedAdaptiveColor({Color? light, Color? dark}) =>
-      isDark ? (dark ?? AppColorsTheme.black) : (light ?? AppColorsTheme.white);
+      isDark ? (dark ?? AppColors.black) : (light ?? AppColors.white);
 
   /// Defines [MediaQueryData] based on provided context.
   Size get size => MediaQuery.sizeOf(this);
@@ -61,7 +59,37 @@ extension BuildContextX on BuildContext {
   bool get isIOS => !isAndroid;
 
   /// Whether the current device is a `mobile`.
-  bool get isMobile => isAndroid || isIOS;
+  bool get isMobileDevice => isAndroid || isIOS;
+
+  // /// Whether the device is a mobile phone.
+  // bool get isMobile => screenWidth < 600 && screenHeight < 1000;
+  //
+  // /// Whether the device is a tablet.
+  // bool get isTablet =>
+  //     screenWidth >= 600 && screenWidth < 840 && screenHeight >= 1000;
+  //
+  // /// Whether the device is a desktop.
+  // bool get isDesktop => screenWidth >= 840 && screenHeight >= 1000;
+
+  /// Whether the device is a mobile phone.
+  bool get isMobile => screenWidth < 600;
+
+  /// Whether the device is a tablet.
+  bool get isTablet => screenWidth >= 600 && screenWidth < 840;
+
+  /// Whether the device is a desktop.
+  bool get isDesktop => screenWidth >= 840;
+
+  /// Returns the appropriate widget based on the screen size.
+  Widget responsiveWidget({
+    required Widget mobile,
+    Widget? tablet,
+    Widget? desktop,
+  }) {
+    if (isDesktop && desktop != null) return desktop;
+    if (isTablet && tablet != null) return tablet;
+    return mobile;
+  }
 
   /// base extensions
   /// Returns the theme extension of type [T] or null if not found.
@@ -75,5 +103,5 @@ extension BuildContextX on BuildContext {
   /// {@endtemplate}
   T extension<T>() => Theme.of(this).extension<T>()!;
 
-  AppColorsTheme get appColorsTheme => extension<AppColorsTheme>();
+  AppColors get appColorsTheme => extension<AppColors>();
 }

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stackfood/core/di/injection_container.dart';
+import 'package:stackfood/core/global/widgets/error_state_handler.dart';
 import 'package:stackfood/features/home/data/repository/home_repo_impl.dart';
 import 'package:stackfood/features/home/presentation/food_campaign/cubit/food_campaign_cubit.dart';
 import 'package:stackfood/features/home/presentation/food_campaign/widget/food_campaign_item_card.dart';
+import 'package:stackfood/features/home/presentation/food_campaign/widget/food_campaign_shimmer.dart';
 
 class FoodCampaignSection extends StatelessWidget {
   const FoodCampaignSection({super.key});
@@ -26,11 +28,10 @@ class FoodCampaignView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<FoodCampaignCubit, FoodCampaignState>(
       builder: (context, state) => switch (state) {
-        FoodCampaignInitial() || FoodCampaignLoading() => const Center(
-            child: CircularProgressIndicator(),
-          ),
-        FoodCampaignError(:final message) => Center(
-            child: Text(message, style: const TextStyle(color: Colors.red)),
+        FoodCampaignInitial() || FoodCampaignLoading() => FoodCampaignShimmer(),
+        FoodCampaignError() => ErrorStateHandler(
+            child: FoodCampaignShimmer(),
+            onRetry: () => context.read<FoodCampaignCubit>().getFoodCampaigns(),
           ),
         FoodCampaignLoaded(:final campaigns) => ConstrainedBox(
             constraints: const BoxConstraints(

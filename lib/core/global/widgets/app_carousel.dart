@@ -8,8 +8,7 @@ class AppCarouselSlider extends StatelessWidget {
   final Size indicatorSize;
   final bool autoPlay;
   final bool enlargeCenterPage;
-  final double height;
-  final double radius = 12;
+  final double maxHeight;
 
   AppCarouselSlider({
     super.key,
@@ -18,72 +17,88 @@ class AppCarouselSlider extends StatelessWidget {
     this.indicatorSize = const Size(10, 10),
     this.autoPlay = true,
     this.enlargeCenterPage = true,
-    required this.height,
+    this.maxHeight = 300,
   });
 
   final ValueNotifier<int> _currentIndexNotifier = ValueNotifier<int>(0);
 
   @override
   Widget build(BuildContext context) {
-    return ConstrainedBox(
-      constraints: BoxConstraints(
-        maxHeight: height,
-      ),
-      child: Column(
-        children: [
-          CarouselSlider.builder(
-            itemCount: imageUrls.length,
-            itemBuilder: (context, index, realIndex) {
-              return ClipRRect(
-                borderRadius: BorderRadius.circular(radius),
-                child: RepaintBoundary(
-                  child: CustomImageWidget(
-                    scale: 1,
-                    imageUrl: imageUrls[index],
-                    fit: BoxFit.fitWidth,
-                  ),
-                ),
-              );
-            },
-            options: CarouselOptions(
-              clipBehavior: Clip.antiAlias,
-              enlargeCenterPage: enlargeCenterPage,
-              disableCenter: true,
-              enlargeStrategy: CenterPageEnlargeStrategy.scale,
-              autoPlayAnimationDuration: const Duration(milliseconds: 500),
-              autoPlayCurve: Curves.ease,
-              autoPlay: autoPlay,
-              aspectRatio: aspectRatio,
-              viewportFraction: 0.7,
-              height: height - 30,
-              onPageChanged: (index, reason) {
-                _currentIndexNotifier.value = index;
-              },
-            ),
-          ),
-          const SizedBox(height: 12),
-          ValueListenableBuilder(
-            valueListenable: _currentIndexNotifier,
-            builder: (context, value, child) {
-              return Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(imageUrls.length, (index) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 6.0),
-                    child: CustomPaint(
-                      size: indicatorSize,
-                      painter: CircleIndicatorPainter(
-                        isActive: index == value,
-                        context: context,
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        double currentAspectRatio = aspectRatio;
+        if (constraints.maxWidth < 768) {
+          currentAspectRatio = 27 / 8;
+        } else if (constraints.maxWidth < 1200) {
+          currentAspectRatio = 29 / 8;
+        } else {
+          currentAspectRatio = 32 / 8;
+        }
+
+        final double calculatedHeight =
+            constraints.maxWidth / currentAspectRatio;
+        final double carouselHeight =
+            calculatedHeight > maxHeight ? maxHeight : calculatedHeight;
+
+        return Column(
+          children: [
+            AspectRatio(
+              aspectRatio: currentAspectRatio,
+              child: CarouselSlider.builder(
+                itemCount: imageUrls.length,
+                itemBuilder: (context, index, realIndex) {
+                  return ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: RepaintBoundary(
+                      child: CustomImageWidget(
+                        scale: 1,
+                        imageUrl: imageUrls[index],
+                        fit: BoxFit.fitWidth,
                       ),
                     ),
                   );
-                }),
-              );
-            },
-          ),
-        ],
-      ),
+                },
+                options: CarouselOptions(
+                  clipBehavior: Clip.antiAlias,
+                  enlargeCenterPage: enlargeCenterPage,
+                  disableCenter: true,
+                  enlargeStrategy: CenterPageEnlargeStrategy.scale,
+                  autoPlayAnimationDuration: const Duration(milliseconds: 500),
+                  autoPlayCurve: Curves.ease,
+                  autoPlay: autoPlay,
+                  aspectRatio: currentAspectRatio,
+                  viewportFraction: 0.8,
+                  height: carouselHeight,
+                  onPageChanged: (index, reason) {
+                    _currentIndexNotifier.value = index;
+                  },
+                ),
+              ),
+            ),
+            const SizedBox(height: 12),
+            ValueListenableBuilder(
+              valueListenable: _currentIndexNotifier,
+              builder: (context, value, child) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: List.generate(imageUrls.length, (index) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 6.0),
+                      child: CustomPaint(
+                        size: indicatorSize,
+                        painter: CircleIndicatorPainter(
+                          isActive: index == value,
+                          context: context,
+                        ),
+                      ),
+                    );
+                  }),
+                );
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

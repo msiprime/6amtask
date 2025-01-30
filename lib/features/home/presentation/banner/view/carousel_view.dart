@@ -3,8 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stackfood/core/di/injection_container.dart';
 import 'package:stackfood/core/global/extension/context_extension.dart';
 import 'package:stackfood/core/global/widgets/app_carousel.dart';
+import 'package:stackfood/core/global/widgets/error_state_handler.dart';
 import 'package:stackfood/features/home/data/repository/home_repo_impl.dart';
 import 'package:stackfood/features/home/presentation/banner/cubit/home_banner_cubit.dart';
+import 'package:stackfood/features/home/presentation/banner/widget/carousel_shimmer.dart';
 
 class HomeCarouselSection extends StatelessWidget {
   const HomeCarouselSection({super.key});
@@ -15,7 +17,7 @@ class HomeCarouselSection extends StatelessWidget {
       create: (context) => HomeBannerCubit(
         homeRepository: sl.get<HomeRepositoryImpl>(),
       )..getBanners(),
-      child: HomeCarouselView(),
+      child: const HomeCarouselView(),
     );
   }
 }
@@ -27,23 +29,17 @@ class HomeCarouselView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeBannerCubit, HomeBannerState>(
       builder: (context, state) {
-        if (state is BannerInitial || state is BannerLoading) {
-          return const Center(
-            child: CircularProgressIndicator.adaptive(),
-          );
-        } else if (state is BannerLoaded) {
-          return AppCarouselSlider(
-            imageUrls: state.banners.map((e) => e.imageUrl).toList(),
-            height: context.screenHeight * 0.17,
-          );
-        } else if (state is BannerError) {
-          return Center(
-            child: Text(state.message),
-          );
-        }
-        return const Center(
-          child: CircularProgressIndicator.adaptive(),
-        );
+        return switch (state) {
+          BannerInitial() || BannerLoading() => const CarouselShimmer(),
+          BannerLoaded(:final banners) => AppCarouselSlider(
+              imageUrls: banners.map((e) => e.imageUrl).toList(),
+              maxHeight: context.screenHeight * 0.17,
+            ),
+          BannerError() => ErrorStateHandler(
+              child: const CarouselShimmer(),
+              onRetry: () => context.read<HomeBannerCubit>().getBanners(),
+            ),
+        };
       },
     );
   }

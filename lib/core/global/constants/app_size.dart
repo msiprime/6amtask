@@ -22,4 +22,7 @@ abstract class AppSize {
 
   /// The extra small size of icon (12.0)
   static const xxs = 12.0;
+
+  /// The extra extra small size of icon (10.0)
+  static const xxxs = 8.0;
 }

@@ -4,6 +4,7 @@ import 'package:stackfood/core/global/constants/app_spacing.dart';
 import 'package:stackfood/features/home/presentation/banner/view/carousel_view.dart';
 import 'package:stackfood/features/home/presentation/categories/view/category_item_view.dart';
 import 'package:stackfood/features/home/presentation/food_campaign/view/food_campaign_view.dart';
+import 'package:stackfood/features/home/presentation/home_screen/widget/home_app_bar.dart';
 import 'package:stackfood/features/home/presentation/home_screen/widget/home_title_section.dart';
 import 'package:stackfood/features/home/presentation/popular_food/view/popular_food_view.dart';
 import 'package:stackfood/features/home/presentation/restaurant/view/restaurant_home_view.dart';
@@ -43,61 +44,60 @@ class HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      controller: _scrollController,
-      slivers: [
-        SliverAppBar(
-          title: Text('Home'),
-        ),
-        SliverToBoxAdapter(
-          child: HomeCarouselSection(),
-        ),
-        SliverToBoxAdapter(
-          child: HomeTitleSectionWithViewAll(
-            title: 'Categories',
-            onViewAllTap: () {},
+    return SafeArea(
+      child: CustomScrollView(
+        controller: _scrollController,
+        slivers: [
+          const TopHomeAppBar(),
+          const HomeSearchAppBar(),
+          const SliverGap(AppSpacing.md),
+          const SliverToBoxAdapter(
+            child: HomeCarouselSection(),
           ),
-        ),
-        SliverGap(AppSpacing.md),
-        SliverToBoxAdapter(
-          child: CategoryItemSection(),
-        ),
-        SliverGap(AppSpacing.md),
-        SliverToBoxAdapter(
-          child: HomeTitleSectionWithViewAll(
-            title: 'Popular Food Nearby',
-            onViewAllTap: () {},
+          SliverToBoxAdapter(
+            child: HomeTitleSectionWithViewAll(
+              title: 'Categories',
+              onViewAllTap: () {},
+            ),
           ),
-        ),
-        SliverGap(AppSpacing.sm),
-        SliverToBoxAdapter(
-          child: PopularFoodSection(),
-        ),
-        SliverGap(AppSpacing.md),
-        SliverToBoxAdapter(
-          child: HomeTitleSectionWithViewAll(
-            title: 'Food Campaign',
-            onViewAllTap: () {},
+          const SliverGap(AppSpacing.sm),
+          const SliverToBoxAdapter(
+            child: CategoryItemSection(),
           ),
-        ),
-        SliverGap(AppSpacing.md),
-        SliverToBoxAdapter(
-          child: FoodCampaignSection(),
-        ),
-        SliverGap(AppSpacing.md),
-        SliverToBoxAdapter(
-          child: HomeTitleSectionWithViewAll(
-            title: 'Restaurants',
-            onViewAllTap: () {},
+          const SliverGap(AppSpacing.sm),
+          SliverToBoxAdapter(
+            child: HomeTitleSectionWithViewAll(
+              title: 'Popular Food Nearby',
+              onViewAllTap: () {},
+            ),
           ),
-        ),
-        SliverGap(AppSpacing.md),
-        RestaurantHomeSection(scrollController: _scrollController),
-        SliverGap(AppSpacing.md),
-        SliverGap(AppSpacing.md),
-        SliverGap(AppSpacing.md),
-        SliverGap(AppSpacing.md),
-      ],
+          const SliverGap(AppSpacing.sm),
+          const SliverToBoxAdapter(
+            child: PopularFoodSection(),
+          ),
+          const SliverGap(AppSpacing.md),
+          SliverToBoxAdapter(
+            child: HomeTitleSectionWithViewAll(
+              title: 'Food Campaign',
+              onViewAllTap: () {},
+            ),
+          ),
+          const SliverGap(AppSpacing.md),
+          const SliverToBoxAdapter(
+            child: FoodCampaignSection(),
+          ),
+          const SliverGap(AppSpacing.md),
+          SliverToBoxAdapter(
+            child: HomeTitleSectionWithViewAll(
+              title: 'Restaurants',
+              onViewAllTap: () {},
+            ),
+          ),
+          const SliverGap(AppSpacing.md),
+          RestaurantHomeSection(scrollController: _scrollController),
+          const SliverGap(100),
+        ],
+      ),
     );
   }
 }
