@@ -1,10 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:stackfood/core/global/extension/context_extension.dart';
 import 'package:stackfood/core/global/widgets/image_thumbnail.dart';
 
 class AppCarouselSlider extends StatelessWidget {
   final List<String> imageUrls;
-  final double aspectRatio;
   final Size indicatorSize;
   final bool autoPlay;
   final bool enlargeCenterPage;
@@ -13,7 +13,6 @@ class AppCarouselSlider extends StatelessWidget {
   AppCarouselSlider({
     super.key,
     required this.imageUrls,
-    this.aspectRatio = 16 / 9,
     this.indicatorSize = const Size(10, 10),
     this.autoPlay = true,
     this.enlargeCenterPage = true,
@@ -26,52 +25,48 @@ class AppCarouselSlider extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
-        double currentAspectRatio = aspectRatio;
-        if (constraints.maxWidth < 768) {
-          currentAspectRatio = 27 / 8;
-        } else if (constraints.maxWidth < 1200) {
-          currentAspectRatio = 29 / 8;
-        } else {
-          currentAspectRatio = 32 / 8;
-        }
+        double currentAspectRatio = context.isMobile ? 25 / 9 : 30 / 9;
 
-        final double calculatedHeight =
-            constraints.maxWidth / currentAspectRatio;
-        final double carouselHeight =
-            calculatedHeight > maxHeight ? maxHeight : calculatedHeight;
+        double carouselHeight = maxHeight;
 
         return Column(
           children: [
-            AspectRatio(
-              aspectRatio: currentAspectRatio,
-              child: CarouselSlider.builder(
-                itemCount: imageUrls.length,
-                itemBuilder: (context, index, realIndex) {
-                  return ClipRRect(
-                    borderRadius: BorderRadius.circular(12),
-                    child: RepaintBoundary(
-                      child: CustomImageWidget(
-                        scale: 1,
-                        imageUrl: imageUrls[index],
-                        fit: BoxFit.fitWidth,
+            ConstrainedBox(
+              constraints: BoxConstraints(
+                maxHeight: carouselHeight,
+              ),
+              child: AspectRatio(
+                aspectRatio: currentAspectRatio,
+                child: CarouselSlider.builder(
+                  itemCount: imageUrls.length,
+                  itemBuilder: (context, index, realIndex) {
+                    return ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: RepaintBoundary(
+                        child: CustomImageWidget(
+                          scale: 1,
+                          imageUrl: imageUrls[index],
+                          fit: BoxFit.fitWidth,
+                        ),
                       ),
-                    ),
-                  );
-                },
-                options: CarouselOptions(
-                  clipBehavior: Clip.antiAlias,
-                  enlargeCenterPage: enlargeCenterPage,
-                  disableCenter: true,
-                  enlargeStrategy: CenterPageEnlargeStrategy.scale,
-                  autoPlayAnimationDuration: const Duration(milliseconds: 500),
-                  autoPlayCurve: Curves.ease,
-                  autoPlay: autoPlay,
-                  aspectRatio: currentAspectRatio,
-                  viewportFraction: 0.8,
-                  height: carouselHeight,
-                  onPageChanged: (index, reason) {
-                    _currentIndexNotifier.value = index;
+                    );
                   },
+                  options: CarouselOptions(
+                    height: carouselHeight,
+                    clipBehavior: Clip.antiAlias,
+                    enlargeCenterPage: enlargeCenterPage,
+                    disableCenter: true,
+                    enlargeStrategy: CenterPageEnlargeStrategy.scale,
+                    autoPlayAnimationDuration:
+                        const Duration(milliseconds: 500),
+                    autoPlayCurve: Curves.ease,
+                    autoPlay: autoPlay,
+                    aspectRatio: currentAspectRatio,
+                    viewportFraction: 0.8,
+                    onPageChanged: (index, reason) {
+                      _currentIndexNotifier.value = index;
+                    },
+                  ),
                 ),
               ),
             ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-import 'package:stackfood/core/global/extension/context_extension.dart';
 import 'package:stackfood/core/global/widgets/app_carousel.dart';
 
 class CarouselShimmer extends StatelessWidget {
@@ -21,7 +20,6 @@ class CarouselShimmer extends StatelessWidget {
           'https://via.placeholder.com/150',
           'https://via.placeholder.com/150',
         ],
-        maxHeight: context.screenHeight * 0.17,
       ),
     ));
   }

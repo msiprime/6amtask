@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stackfood/core/global/constants/app_size.dart';
 import 'package:stackfood/core/global/constants/app_spacing.dart';
 import 'package:stackfood/core/global/extension/context_extension.dart';
+import 'package:stackfood/core/global/logger/logger.dart';
 import 'package:stackfood/core/global/widgets/image_thumbnail.dart';
 import 'package:stackfood/features/home/domain/entity/popular_product_entity.dart';
 
@@ -15,33 +16,37 @@ class PopularFoodItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = context.screenWidth;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        double itemHeight = constraints.maxHeight;
+        double itemWidth = itemHeight * 1.2;
 
-    double itemWidth = screenWidth * 0.5;
-    double itemHeight = itemWidth * 0.9;
-    return Center(
-      child: Card(
-        elevation: 0,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Expanded(
-              child: ImageContainer(
-                itemHeight: itemHeight,
-                itemWidth: itemWidth,
-                popularFood: popularFood,
-              ),
+        logE("itemWidth: $itemWidth, itemHeight: $itemHeight");
+
+        return Center(
+          child: Card(
+            elevation: 0,
+            child: Column(
+              children: [
+                Expanded(
+                  child: ImageContainer(
+                    itemHeight: itemHeight * 0.5,
+                    itemWidth: itemWidth,
+                    popularFood: popularFood,
+                  ),
+                ),
+                Expanded(
+                  child: InfoContainer(
+                    itemHeight: itemHeight * 0.5,
+                    itemWidth: itemWidth,
+                    popularFood: popularFood,
+                  ),
+                ),
+              ],
             ),
-            Expanded(
-              child: InfoContainer(
-                itemHeight: itemHeight,
-                itemWidth: itemWidth,
-                popularFood: popularFood,
-              ),
-            ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }
@@ -88,7 +93,7 @@ class InfoContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: itemHeight * 0.5,
+      height: itemHeight,
       width: itemWidth,
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:stackfood/core/global/constants/app_spacing.dart';
+import 'package:stackfood/core/global/extension/context_extension.dart';
 import 'package:stackfood/features/home/domain/entity/popular_product_entity.dart';
 import 'package:stackfood/features/home/presentation/popular_food/widget/popular_food_item_card.dart';
 
@@ -14,7 +15,7 @@ class PopularFoodShimmer extends StatelessWidget {
     return Center(
       child: Skeletonizer(
         child: ConstrainedBox(
-          constraints: BoxConstraints(maxHeight: 200),
+          constraints: BoxConstraints(maxHeight: context.isMobile ? 200 : 250),
           child: ListView.builder(
             itemCount: 5,
             scrollDirection: Axis.horizontal,

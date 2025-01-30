@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stackfood/core/di/injection_container.dart';
-import 'package:stackfood/core/global/extension/context_extension.dart';
 import 'package:stackfood/core/global/widgets/app_carousel.dart';
 import 'package:stackfood/core/global/widgets/error_state_handler.dart';
 import 'package:stackfood/features/home/data/repository/home_repo_impl.dart';
@@ -33,7 +32,6 @@ class HomeCarouselView extends StatelessWidget {
           BannerInitial() || BannerLoading() => const CarouselShimmer(),
           BannerLoaded(:final banners) => AppCarouselSlider(
               imageUrls: banners.map((e) => e.imageUrl).toList(),
-              maxHeight: context.screenHeight * 0.17,
             ),
           BannerError() => ErrorStateHandler(
               child: const CarouselShimmer(),
