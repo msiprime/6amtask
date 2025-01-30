@@ -16,63 +16,60 @@ class TopHomeAppBar extends StatelessWidget {
       elevation: 0,
       scrolledUnderElevation: 0,
       title: const TopHeaderAppBarSection(),
+      surfaceTintColor: Colors.transparent,
       floating: true,
-      pinned: false,
+      pinned: true,
       primary: true,
       collapsedHeight: 56,
-      expandedHeight: 56,
-      stretch: true,
-    );
-  }
-}
-
-class HomeSearchAppBar extends StatelessWidget {
-  const HomeSearchAppBar({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return SliverAppBar(
-      stretch: true,
-      elevation: 0,
-      scrolledUnderElevation: 0,
-      titleSpacing: 0,
-      floating: false,
-      pinned: true,
-      toolbarHeight: 80,
-      title: Padding(
-        padding: const EdgeInsets.symmetric(
-            horizontal: AppSpacing.lg, vertical: AppSpacing.lg),
-        child: SearchAnchor(
-          suggestionsBuilder: (context, controller) => Future.value([]),
-          builder: (context, controller) => SearchBar(
-            controller: controller,
-            shadowColor: WidgetStatePropertyAll(AppColors.red),
-            scrollPadding: const EdgeInsets.all(AppSpacing.lg),
-            elevation: WidgetStatePropertyAll(0),
-            trailing: [
-              IconButton(
-                icon: const Icon(CupertinoIcons.search),
-                onPressed: () {},
-              ),
-            ],
-            shape: WidgetStatePropertyAll(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
+      expandedHeight: 120,
+      forceElevated: false,
+      bottom: PreferredSize(
+        preferredSize: const Size.fromHeight(0),
+        child: SizedBox(
+          height: 56,
+          child: Padding(
+            padding: const EdgeInsets.only(
+              left: AppSpacing.md,
+              right: AppSpacing.md,
+              bottom: AppSpacing.sm,
+            ),
+            child: SearchAnchor(
+              suggestionsBuilder: (context, controller) => Future.value([]),
+              builder: (context, controller) => SearchBar(
+                controller: controller,
+                shadowColor: WidgetStatePropertyAll(AppColors.red),
+                scrollPadding: const EdgeInsets.all(AppSpacing.lg),
+                elevation: WidgetStatePropertyAll(0),
+                trailing: [
+                  IconButton(
+                    icon: const Icon(CupertinoIcons.search),
+                    onPressed: () {},
+                  ),
+                ],
+                shape: WidgetStatePropertyAll(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                padding: WidgetStatePropertyAll(
+                    const EdgeInsets.symmetric(horizontal: AppSpacing.md)),
+                hintStyle: WidgetStatePropertyAll(
+                  const TextStyle(
+                    fontSize: 16,
+                    color: AppColors.grey,
+                  ),
+                ),
+                hintText: 'Search for food, restaurants, etc.',
+                backgroundColor: WidgetStatePropertyAll(Colors.white),
               ),
             ),
-            padding: WidgetStatePropertyAll(
-                const EdgeInsets.symmetric(horizontal: AppSpacing.md)),
-            hintStyle: WidgetStatePropertyAll(
-              const TextStyle(
-                fontSize: 16,
-                color: AppColors.grey,
-              ),
-            ),
-            hintText: 'Search for food, restaurants, etc.',
-            backgroundColor: WidgetStatePropertyAll(Colors.white),
           ),
+        ),
+      ),
+      forceMaterialTransparency: false,
+      flexibleSpace: FlexibleSpaceBar(
+        background: Container(
+          color: Colors.transparent,
         ),
       ),
     );

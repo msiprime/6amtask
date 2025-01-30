@@ -45,58 +45,60 @@ class HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: CustomScrollView(
-        controller: _scrollController,
-        slivers: [
-          const TopHomeAppBar(),
-          const HomeSearchAppBar(),
-          const SliverGap(AppSpacing.md),
-          const SliverToBoxAdapter(
-            child: HomeCarouselSection(),
-          ),
-          SliverToBoxAdapter(
-            child: HomeTitleSectionWithViewAll(
-              title: 'Categories',
-              onViewAllTap: () {},
+      top: false,
+      child: Scaffold(
+        body: CustomScrollView(
+          controller: _scrollController,
+          slivers: [
+            const TopHomeAppBar(),
+            const SliverGap(AppSpacing.xxs),
+            const SliverToBoxAdapter(
+              child: HomeCarouselSection(),
             ),
-          ),
-          const SliverGap(AppSpacing.sm),
-          const SliverToBoxAdapter(
-            child: CategoryItemSection(),
-          ),
-          const SliverGap(AppSpacing.sm),
-          SliverToBoxAdapter(
-            child: HomeTitleSectionWithViewAll(
-              title: 'Popular Food Nearby',
-              onViewAllTap: () {},
+            SliverToBoxAdapter(
+              child: HomeTitleSectionWithViewAll(
+                title: 'Categories',
+                onViewAllTap: () {},
+              ),
             ),
-          ),
-          const SliverGap(AppSpacing.sm),
-          const SliverToBoxAdapter(
-            child: PopularFoodSection(),
-          ),
-          const SliverGap(AppSpacing.md),
-          SliverToBoxAdapter(
-            child: HomeTitleSectionWithViewAll(
-              title: 'Food Campaign',
-              onViewAllTap: () {},
+            const SliverGap(AppSpacing.sm),
+            const SliverToBoxAdapter(
+              child: CategoryItemSection(),
             ),
-          ),
-          const SliverGap(AppSpacing.md),
-          const SliverToBoxAdapter(
-            child: FoodCampaignSection(),
-          ),
-          const SliverGap(AppSpacing.md),
-          SliverToBoxAdapter(
-            child: HomeTitleSectionWithViewAll(
-              title: 'Restaurants',
-              onViewAllTap: () {},
+            const SliverGap(AppSpacing.sm),
+            SliverToBoxAdapter(
+              child: HomeTitleSectionWithViewAll(
+                title: 'Popular Food Nearby',
+                onViewAllTap: () {},
+              ),
             ),
-          ),
-          const SliverGap(AppSpacing.md),
-          RestaurantHomeSection(scrollController: _scrollController),
-          const SliverGap(100),
-        ],
+            const SliverGap(AppSpacing.sm),
+            const SliverToBoxAdapter(
+              child: PopularFoodSection(),
+            ),
+            const SliverGap(AppSpacing.md),
+            SliverToBoxAdapter(
+              child: HomeTitleSectionWithViewAll(
+                title: 'Food Campaign',
+                onViewAllTap: () {},
+              ),
+            ),
+            const SliverGap(AppSpacing.md),
+            const SliverToBoxAdapter(
+              child: FoodCampaignSection(),
+            ),
+            const SliverGap(AppSpacing.md),
+            SliverToBoxAdapter(
+              child: HomeTitleSectionWithViewAll(
+                title: 'Restaurants',
+                onViewAllTap: () {},
+              ),
+            ),
+            const SliverGap(AppSpacing.md),
+            RestaurantHomeSection(scrollController: _scrollController),
+            const SliverGap(100),
+          ],
+        ),
       ),
     );
   }

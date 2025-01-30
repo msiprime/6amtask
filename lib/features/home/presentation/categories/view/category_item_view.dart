@@ -33,24 +33,14 @@ class CategoryItemView extends StatelessWidget {
           HomeCategoryInitial() ||
           HomeCategoryLoading() =>
             CategoryShimmerWidget(),
-          HomeCategoryLoaded() => context.responsiveWidget(
-              mobile: ConstrainedBox(
-                constraints: BoxConstraints(maxHeight: 100),
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) =>
-                      CategoryItem(category: state.categories[index]),
-                  itemCount: state.categories.length,
-                ),
-              ),
-              desktop: ConstrainedBox(
-                constraints: BoxConstraints(maxHeight: 150),
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) =>
-                      CategoryItem(category: state.categories[index]),
-                  itemCount: state.categories.length,
-                ),
+          HomeCategoryLoaded() => ConstrainedBox(
+              constraints:
+                  BoxConstraints(maxHeight: context.isDesktop ? 150 : 100),
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) =>
+                    CategoryItem(category: state.categories[index]),
+                itemCount: state.categories.length,
               ),
             ),
           HomeCategoryError() => ErrorStateHandler(

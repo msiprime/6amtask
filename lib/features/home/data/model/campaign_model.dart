@@ -6,6 +6,7 @@ class CampaignModel {
   String? description;
   int? price;
   int? discount;
+  String? address;
   String? discountType;
   int? restaurantId;
   String? name;
@@ -35,6 +36,7 @@ class CampaignModel {
     this.availableDateStarts,
     this.availableDateEnds,
     this.recommended,
+    this.address,
     this.restaurantName,
     this.restaurantStatus,
     this.restaurantDiscount,
@@ -47,6 +49,7 @@ class CampaignModel {
     id = json['id'];
     image = json['image'];
     description = json['description'];
+    address = json['address'];
     price = json['price'];
     discount = json['discount'];
     discountType = json['discount_type'];
@@ -71,6 +74,7 @@ extension CampaignModelExtension on CampaignModel {
     return CampaignEntity(
       id: id ?? -1,
       name: name ?? '',
+      address: address ?? '',
       averageRating: avgRating?.toDouble() ?? 0.0,
       description: description ?? '',
       price: price?.toDouble() ?? 0.0,

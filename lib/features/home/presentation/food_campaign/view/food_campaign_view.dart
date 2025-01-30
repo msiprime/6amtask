@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stackfood/core/di/injection_container.dart';
+import 'package:stackfood/core/global/extension/context_extension.dart';
 import 'package:stackfood/core/global/widgets/error_state_handler.dart';
 import 'package:stackfood/features/home/data/repository/home_repo_impl.dart';
 import 'package:stackfood/features/home/presentation/food_campaign/cubit/food_campaign_cubit.dart';
@@ -34,8 +35,8 @@ class FoodCampaignView extends StatelessWidget {
             onRetry: () => context.read<FoodCampaignCubit>().getFoodCampaigns(),
           ),
         FoodCampaignLoaded(:final campaigns) => ConstrainedBox(
-            constraints: const BoxConstraints(
-              maxHeight: 135,
+            constraints: BoxConstraints(
+              maxHeight: context.isDesktop ? 165 : 135,
             ),
             child: ListView.builder(
               scrollDirection: Axis.horizontal,

@@ -8,6 +8,7 @@ class CampaignEntity {
   final String imageUrl;
   final String restaurantName;
   final double averageRating;
+  final String address;
 
   const CampaignEntity({
     required this.id,
@@ -19,6 +20,7 @@ class CampaignEntity {
     required this.imageUrl,
     required this.restaurantName,
     required this.averageRating,
+    required this.address,
   });
 
   double getDiscountPercentage() {

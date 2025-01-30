@@ -15,7 +15,7 @@ class FoodCampaignItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IntrinsicWidth(
-      stepWidth: 330,
+      stepWidth: context.isDesktop ? 370 : 330,
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppSpacing.md),
@@ -24,25 +24,7 @@ class FoodCampaignItemCard extends StatelessWidget {
         color: Colors.white,
         child: Row(
           children: [
-            Stack(children: [
-              Padding(
-                padding: const EdgeInsets.all(AppSpacing.sm),
-                child: CustomImageWidget(
-                  borderRadius: BorderRadius.circular(AppSpacing.md),
-                  imageUrl: campaign.imageUrl,
-                  height: 125,
-                  width: 120,
-                  scale: 0.5,
-                ),
-              ),
-              Positioned(
-                top: 30,
-                left: 0,
-                child: CustomDiscountLabel(
-                  discount: campaign.discount.toStringAsFixed(0),
-                ),
-              ),
-            ]),
+            _ImageAndDiscountPart(campaign: campaign),
             const SizedBox(width: AppSpacing.sm),
             Expanded(
                 child: Column(
@@ -59,58 +41,99 @@ class FoodCampaignItemCard extends StatelessWidget {
                   overflow: TextOverflow.fade,
                 ),
                 Text(
-                  'Mc Donald, New York, USA',
+                  campaign.restaurantName,
                   style: context.theme.textTheme.titleSmall?.copyWith(
                     color: Colors.grey,
                   ),
                   overflow: TextOverflow.fade,
                 ),
                 RatingStars(rating: campaign.averageRating),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        /// We could make it double, (AS PER UI, I am keeping it as it is)
-                        Text(
-                          '\$ ${campaign.getDiscountedPrice().toStringAsFixed(0)}',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
-                        ),
-                        const SizedBox(width: 6),
-                        Text(
-                          '\$ ${campaign.price.toStringAsFixed(0)}',
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey.shade500,
-                            decoration: TextDecoration.lineThrough,
-                          ),
-                        ),
-                      ],
-                    ),
-                    IconButton(
-                      style: ButtonStyle(
-                        visualDensity: VisualDensity.compact,
-                        padding: WidgetStatePropertyAll(
-                          EdgeInsets.zero,
-                        ),
-                      ),
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.add,
-                        size: AppSize.xlg,
-                      ),
-                    ),
-                  ],
-                ),
+                _PriceAndAddToCartPart(campaign: campaign),
               ],
             ))
           ],
         ),
       ),
     );
+  }
+}
+
+class _PriceAndAddToCartPart extends StatelessWidget {
+  const _PriceAndAddToCartPart({
+    required this.campaign,
+  });
+
+  final CampaignEntity campaign;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Row(
+          children: [
+            /// We could make it double, (AS PER UI, I am keeping it as it is)
+            Text(
+              '\$ ${campaign.getDiscountedPrice().toStringAsFixed(0)}',
+              style: context.theme.textTheme.titleSmall?.copyWith(
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            const SizedBox(width: 6),
+            Text(
+              '\$ ${campaign.price.toStringAsFixed(0)}',
+              style: context.theme.textTheme.titleSmall?.copyWith(
+                color: Colors.grey,
+                decoration: TextDecoration.lineThrough,
+              ),
+            ),
+          ],
+        ),
+        IconButton(
+          style: ButtonStyle(
+            visualDensity: VisualDensity.compact,
+            padding: WidgetStatePropertyAll(
+              EdgeInsets.zero,
+            ),
+          ),
+          onPressed: () {},
+          icon: Icon(
+            Icons.add,
+            size: AppSize.xlg,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _ImageAndDiscountPart extends StatelessWidget {
+  const _ImageAndDiscountPart({
+    required this.campaign,
+  });
+
+  final CampaignEntity campaign;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(children: [
+      Padding(
+        padding: const EdgeInsets.all(AppSpacing.sm),
+        child: CustomImageWidget(
+          borderRadius: BorderRadius.circular(AppSpacing.md),
+          imageUrl: campaign.imageUrl,
+          height: 125,
+          width: 120,
+          scale: 0.5,
+        ),
+      ),
+      Positioned(
+        top: 30,
+        left: 0,
+        child: CustomDiscountLabel(
+          discount: campaign.discount.toStringAsFixed(0),
+        ),
+      ),
+    ]);
   }
 }

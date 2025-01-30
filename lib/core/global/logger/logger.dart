@@ -9,7 +9,7 @@ Logger _logger = Logger(
       Level.debug: const AnsiColor.fg(208), // Blue
       Level.info: const AnsiColor.fg(80), //
     },
-    methodCount: 1,
+    methodCount: 2,
     excludePaths: <String>['package:shared/src/config/logger.dart'],
   ),
 );

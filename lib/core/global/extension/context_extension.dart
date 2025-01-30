@@ -61,16 +61,6 @@ extension BuildContextX on BuildContext {
   /// Whether the current device is a `mobile`.
   bool get isMobileDevice => isAndroid || isIOS;
 
-  // /// Whether the device is a mobile phone.
-  // bool get isMobile => screenWidth < 600 && screenHeight < 1000;
-  //
-  // /// Whether the device is a tablet.
-  // bool get isTablet =>
-  //     screenWidth >= 600 && screenWidth < 840 && screenHeight >= 1000;
-  //
-  // /// Whether the device is a desktop.
-  // bool get isDesktop => screenWidth >= 840 && screenHeight >= 1000;
-
   /// Whether the device is a mobile phone.
   bool get isMobile => screenWidth < 600;
 
@@ -79,17 +69,6 @@ extension BuildContextX on BuildContext {
 
   /// Whether the device is a desktop.
   bool get isDesktop => screenWidth >= 840;
-
-  /// Returns the appropriate widget based on the screen size.
-  Widget responsiveWidget({
-    required Widget mobile,
-    Widget? tablet,
-    Widget? desktop,
-  }) {
-    if (isDesktop && desktop != null) return desktop;
-    if (isTablet && tablet != null) return tablet;
-    return mobile;
-  }
 
   /// base extensions
   /// Returns the theme extension of type [T] or null if not found.
