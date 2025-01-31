@@ -15,7 +15,7 @@ class PopularFoodShimmer extends StatelessWidget {
     return Center(
       child: Skeletonizer(
         child: ConstrainedBox(
-          constraints: BoxConstraints(maxHeight: context.isMobile ? 200 : 250),
+          constraints: BoxConstraints(maxHeight: context.isDesktop ? 250 : 210),
           child: ListView.builder(
             itemCount: 5,
             scrollDirection: Axis.horizontal,
