@@ -18,7 +18,7 @@ sealed class AppColors extends ThemeExtension<AppColors> {
   static const Color emphasizeGrey = Color.fromARGB(255, 97, 97, 97);
   static const Color emphasizeDarkGrey = Color.fromARGB(255, 40, 37, 37);
   static const MaterialColor red = Colors.red;
-  static const Color green = Color(0xFF47C87D);
+  static const Color green = Color(0xFF16A554);
 
   /// The blue primary color and swatch.
   static const Color blue = Color(0xFF347AE6);

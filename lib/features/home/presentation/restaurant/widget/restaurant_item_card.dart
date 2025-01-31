@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stackfood/core/global/constants/app_size.dart';
 import 'package:stackfood/core/global/constants/app_spacing.dart';
-import 'package:stackfood/core/global/extension/context_extension.dart';
+import 'package:stackfood/core/global/theme/app_colors.dart';
 import 'package:stackfood/core/global/widgets/app_text_widget.dart';
 import 'package:stackfood/core/global/widgets/custom_rating_widget.dart';
 import 'package:stackfood/core/global/widgets/image_thumbnail.dart';
@@ -45,22 +45,17 @@ class RestaurantItemCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             spacing: AppSpacing.xxs,
             children: [
-              Text(
+              AppText(
                 restaurant.name,
-                maxLines: 1,
-                style: context.theme.textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.w500,
-                  overflow: TextOverflow.fade,
-                ),
+                style: AppTextStyle.titleMedium,
+                fontWeight: FontWeight.w500,
                 overflow: TextOverflow.fade,
               ),
-              Text(
+              AppText(
                 restaurant.address,
+                style: AppTextStyle.bodyMedium,
+                color: AppColors.grey,
                 maxLines: 2,
-                style: context.theme.textTheme.titleSmall?.copyWith(
-                  color: Colors.grey,
-                  overflow: TextOverflow.fade,
-                ),
                 overflow: TextOverflow.fade,
               ),
               FittedBox(
@@ -72,7 +67,7 @@ class RestaurantItemCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
-                      child: AppText('\$ ${"10"}',
+                      child: AppText('\$ ${restaurant.id}',
                           style: AppTextStyle.titleMedium)),
                   IconButton(
                     style: ButtonStyle(

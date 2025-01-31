@@ -5,8 +5,15 @@ abstract class AppSize {
   /// {@macro app_size}
   const AppSize();
 
+  /// The big size of icon (48.0)
+  static const xxxlg = 48.0;
+
+  /// The big size of icon (40.0)
+
+  static const xxlg = 40.0;
+
   /// The big size of icon (30.0)
-  static const xlg = 30.0;
+  static const xlg = 32.0;
 
   /// The big size of icon (24.0)
   static const lg = 24.0;

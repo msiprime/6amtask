@@ -9,6 +9,9 @@ import 'package:stackfood/core/global/widgets/error_screen.dart';
 import 'package:stackfood/features/base/pages/splash_screen.dart';
 import 'package:stackfood/features/home/presentation/home_screen/view/home_screen.dart';
 import 'package:stackfood/features/random/favorite_screen.dart';
+import 'package:stackfood/features/random/my_cart_screen.dart';
+import 'package:stackfood/features/random/my_order_screen.dart';
+import 'package:stackfood/features/random/user_screen.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>(
   debugLabel: '_rootNavigatorKey',
@@ -39,6 +42,21 @@ StatefulShellRoute _buildShellRoutes() {
       StatefulShellBranch(
         routes: [
           _buildFavoriteScreenRoute(),
+        ],
+      ),
+      StatefulShellBranch(
+        routes: [
+          _buildMyCartRoute(),
+        ],
+      ),
+      StatefulShellBranch(
+        routes: [
+          _buildMyOrderRoute(),
+        ],
+      ),
+      StatefulShellBranch(
+        routes: [
+          _buildMyProfileRoute(),
         ],
       ),
     ],
@@ -93,6 +111,32 @@ GoRoute _buildErrorScreenRoute() => GoRoute(
         childBuilder: (_, __) => const ErrorScreen(),
       ),
     );
+
+GoRoute _buildMyCartRoute() => GoRoute(
+      path: MyCartScreen.routeName,
+      name: MyCartScreen.routeName,
+      pageBuilder: _getDefaultPageBuilderByPlatform(
+        childBuilder: (_, __) => const MyCartScreen(),
+      ),
+    );
+
+GoRoute _buildMyOrderRoute() => GoRoute(
+      path: MyOrderScreen.routeName,
+      name: MyOrderScreen.routeName,
+      pageBuilder: _getDefaultPageBuilderByPlatform(
+        childBuilder: (_, __) => const MyOrderScreen(),
+      ),
+    );
+
+GoRoute _buildMyProfileRoute() => GoRoute(
+      path: ProfileScreen.routeName,
+      name: ProfileScreen.routeName,
+      pageBuilder: _getDefaultPageBuilderByPlatform(
+        childBuilder: (_, __) => const ProfileScreen(),
+      ),
+    );
+
+/// /// /// Utility functions /// /// ///
 
 Page<T> _getPageByPlatform<T>({required Widget child}) {
   if (kIsWeb) {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class FavoriteScreen extends StatelessWidget {
   static const String routeName = '/favorite';
+
   const FavoriteScreen({super.key});
 
   @override
@@ -11,10 +12,7 @@ class FavoriteScreen extends StatelessWidget {
         title: Text('Favorite'),
       ),
       body: Center(
-        child: TextButton(
-          onPressed: () {},
-          child: Text('Fetch Data'),
-        ),
+        child: Text('Favorite Screen'),
       ),
     );
   }
