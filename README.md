@@ -1,6 +1,7 @@
 # stackfood assignment
 
-A new Flutter project.
+A Flutter project that displays a list of restaurants, categories, and popular food items using the
+public StackFood API.
 
 ## Getting Started
 
@@ -53,19 +54,51 @@ Before you begin, ensure you have the following installed on your computer:
     ```bash
     flutter build apk --release
    ```
+
 The Apk can be found in the build/app/outputs/flutter-apk directory
 
 ## Screenshots
 
 Here are some screenshots of the app to give you a preview of its user interface:
 
-### Home Screen
+<div style="display: flex;">
+  <img src="assets/screenshots/homepage.png" width="300" style="margin-right: 20px; padding-right: 20px;" alt=""/>
+  <img src="assets/screenshots/homepage_rest.png" width="300" alt=""/>
+</div>
 
-![Home Screen](assets/screenshots/homepage.png)
+## Project Architecture
 
-### Popular Food Section
+The app follows **Clean Architecture** with the following key layers:
 
-![Popular Food Section](assets/screenshots/homepage_rest.png)
+### 1. **Data Layer**
+
+The data layer is responsible for interacting with external data sources like APIs or local
+databases.
+
+- **Data Sources**: Handles fetching data from external APIs.
+- **Repositories**: Implements the repository of domain layer, Modifies the data fetched in
+  datasources.
+- **Models**: Represents the data models used in the app.
+
+In this project, data is fetched from the public StackFood API.
+
+### 2. **Domain Layer**
+
+The domain layer contains the business logic of the application. It consists of:
+
+- **Entities**: Plain data objects used by the domain layer.
+- **Repositories**: An abstraction of the repository layer used by bloc/cubit.
+
+### 3. **Presentation Layer**
+
+The presentation layer contains all the UI-related code and uses the BLoC (Business Logic Component)
+pattern for state management.
+
+- **Widgets**: Various UI components (like RestaurantCard).
+- **View**: The view of that will be displayed (like Category View).
+- **cubits**: Used to reflect the current state of the UI.
+
+---
 
 ## API Endpoints Used
 
