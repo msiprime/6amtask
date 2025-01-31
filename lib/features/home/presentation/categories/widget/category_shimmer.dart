@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+import 'package:stackfood/core/global/effect/static_shimmer_effect.dart';
 import 'package:stackfood/core/global/extension/context_extension.dart';
 import 'package:stackfood/features/home/domain/entity/category_entity.dart';
 import 'package:stackfood/features/home/presentation/categories/widget/category_item.dart';
 
 class CategoryShimmerWidget extends StatelessWidget {
+  final bool isAnimated;
+
   const CategoryShimmerWidget({
+    this.isAnimated = true,
     super.key,
   });
 
@@ -13,6 +17,7 @@ class CategoryShimmerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
         child: Skeletonizer(
+      effect: isAnimated ? null : StaticShimmerEffect(),
       justifyMultiLineText: false,
       child: ConstrainedBox(
         constraints: BoxConstraints(maxHeight: context.isMobile ? 100 : 150),

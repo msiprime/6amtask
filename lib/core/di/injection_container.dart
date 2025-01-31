@@ -3,7 +3,6 @@ import 'package:get_it/get_it.dart';
 import 'package:stackfood/core/global/logger/app_logger.dart';
 import 'package:stackfood/core/global/network/dio_client.dart';
 import 'package:stackfood/features/base/bloc/app_meta_data_cubit/app_meta_data_cubit.dart';
-import 'package:stackfood/features/home/data/datasources/home_datasource.dart';
 import 'package:stackfood/features/home/data/datasources/home_datasource_impl.dart';
 import 'package:stackfood/features/home/data/repository/home_repo_impl.dart';
 

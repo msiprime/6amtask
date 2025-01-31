@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:stackfood/core/global/constants/api_endpoints.dart';
 import 'package:stackfood/core/global/network/dio_client.dart';
 
 import 'home_datasource.dart';
@@ -10,11 +11,10 @@ class HomeDataSourceImpl implements HomeDataSource {
     required DioClient dioClient,
   }) : _dioClient = dioClient;
 
-  // todo: make endpoint for getHomeBanners
   @override
   Future<Response> getHomeBanners() async {
     final response = await _dioClient.get(
-      '/banners',
+      ApiEndpoints.homeBanners,
     );
 
     return response;
@@ -23,7 +23,7 @@ class HomeDataSourceImpl implements HomeDataSource {
   @override
   Future<Response> getHomeCategories() async {
     final response = await _dioClient.get(
-      '/categories',
+      ApiEndpoints.homeCategories,
     );
 
     return response;
@@ -35,7 +35,7 @@ class HomeDataSourceImpl implements HomeDataSource {
     int? limit = 10,
   }) async {
     final response = await _dioClient.get(
-      '/products/popular',
+      ApiEndpoints.homePopularProducts,
       queryParameters: {
         'offset': offset,
         'limit': limit,
@@ -48,7 +48,7 @@ class HomeDataSourceImpl implements HomeDataSource {
   @override
   Future<Response> getHomeFoodCampaigns() async {
     final response = await _dioClient.get(
-      '/campaigns/item',
+      ApiEndpoints.homeFoodCampaigns,
     );
 
     return response;
@@ -60,11 +60,12 @@ class HomeDataSourceImpl implements HomeDataSource {
     required int limit,
   }) async {
     final response = await _dioClient.get(
-        '/restaurants/get-restaurants/all?offset=1&limit=10',
-        queryParameters: {
-          'offset': offset,
-          'limit': limit,
-        });
+      ApiEndpoints.homeRestaurants,
+      queryParameters: {
+        'offset': offset,
+        'limit': limit,
+      },
+    );
 
     return response;
   }

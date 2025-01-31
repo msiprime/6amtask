@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+import 'package:stackfood/core/global/effect/static_shimmer_effect.dart';
 import 'package:stackfood/core/global/extension/context_extension.dart';
 import 'package:stackfood/features/home/domain/entity/campaign_entity.dart';
 import 'package:stackfood/features/home/presentation/food_campaign/widget/food_campaign_item_card.dart';
 
 class FoodCampaignShimmer extends StatelessWidget {
+  final bool isAnimated;
+
   const FoodCampaignShimmer({
+    this.isAnimated = true,
     super.key,
   });
 
@@ -13,6 +17,7 @@ class FoodCampaignShimmer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Skeletonizer(
+        effect: isAnimated ? null : StaticShimmerEffect(),
         child: ConstrainedBox(
           constraints: BoxConstraints(
             maxHeight: context.isDesktop ? 165 : 135,

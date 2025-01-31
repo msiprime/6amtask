@@ -32,18 +32,6 @@ class HomeViewState extends State<HomeView> {
   late ScrollController _scrollController;
 
   @override
-  void initState() {
-    super.initState();
-    _scrollController = ScrollController();
-  }
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return SafeArea(
       top: false,
@@ -53,54 +41,46 @@ class HomeViewState extends State<HomeView> {
           slivers: [
             const HomeAppBar(),
             const SliverGap(AppSpacing.md),
-            const SliverToBoxAdapter(
-              child: HomeCarouselSection(),
-            ),
-            SliverToBoxAdapter(
-              child: HomeTitleSectionWithViewAll(
-                title: AppStrings.categories,
-                onViewAllTap: () {},
-              ),
-            ),
+
+            /// HomeCarouselSection
+            HomeCarouselSection(),
+
+            /// Home Category Section
+            HomeTitleSection(title: AppStrings.categories, onViewAllTap: () {}),
+            CategoryItemSection(),
             const SliverGap(AppSpacing.sm),
-            const SliverToBoxAdapter(
-              child: CategoryItemSection(),
-            ),
-            const SliverGap(AppSpacing.sm),
-            SliverToBoxAdapter(
-              child: HomeTitleSectionWithViewAll(
-                title: AppStrings.popularFoodNearBy,
-                onViewAllTap: () {},
-              ),
-            ),
-            const SliverGap(AppSpacing.sm),
-            const SliverToBoxAdapter(
-              child: PopularFoodSection(),
-            ),
+
+            /// Popular Food Section
+            HomeTitleSection(
+                title: AppStrings.popularFoodNearBy, onViewAllTap: () {}),
+            PopularFoodSection(),
             const SliverGap(AppSpacing.md),
-            SliverToBoxAdapter(
-              child: HomeTitleSectionWithViewAll(
-                title: AppStrings.foodCampaign,
-                onViewAllTap: () {},
-              ),
-            ),
+
+            /// Food Campaign Section
+            HomeTitleSection(
+                title: AppStrings.foodCampaign, onViewAllTap: () {}),
+            FoodCampaignSection(),
             const SliverGap(AppSpacing.md),
-            const SliverToBoxAdapter(
-              child: FoodCampaignSection(),
-            ),
-            const SliverGap(AppSpacing.md),
-            SliverToBoxAdapter(
-              child: HomeTitleSectionWithViewAll(
-                title: AppStrings.restaurants,
-                onViewAllTap: () {},
-              ),
-            ),
-            const SliverGap(AppSpacing.md),
+
+            /// Restaurant Home Section
+            HomeTitleSection(
+                title: AppStrings.restaurants, onViewAllTap: () {}),
             RestaurantHomeSection(scrollController: _scrollController),
-            const SliverGap(100),
           ],
         ),
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 }

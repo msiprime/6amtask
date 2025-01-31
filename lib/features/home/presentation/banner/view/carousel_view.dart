@@ -16,7 +16,7 @@ class HomeCarouselSection extends StatelessWidget {
       create: (context) => HomeBannerCubit(
         homeRepository: sl.get<HomeRepositoryImpl>(),
       )..getBanners(),
-      child: const HomeCarouselView(),
+      child: SliverToBoxAdapter(child: const HomeCarouselView()),
     );
   }
 }
@@ -33,8 +33,11 @@ class HomeCarouselView extends StatelessWidget {
           BannerLoaded(:final banners) => AppCarouselSlider(
               imageUrls: banners.map((e) => e.imageUrl).toList(),
             ),
-          BannerError() => ErrorStateHandler(
-              child: const CarouselShimmer(),
+          BannerError error => ErrorStateHandler(
+              errorMessage: error.message,
+              child: const CarouselShimmer(
+                isAnimated: false,
+              ),
               onRetry: () => context.read<HomeBannerCubit>().getBanners(),
             ),
         };

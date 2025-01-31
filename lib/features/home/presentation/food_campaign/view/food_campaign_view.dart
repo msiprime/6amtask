@@ -17,7 +17,7 @@ class FoodCampaignSection extends StatelessWidget {
       create: (context) => FoodCampaignCubit(
         homeRepository: sl.get<HomeRepositoryImpl>(),
       )..getFoodCampaigns(),
-      child: const FoodCampaignView(),
+      child: SliverToBoxAdapter(child: const FoodCampaignView()),
     );
   }
 }
@@ -30,8 +30,11 @@ class FoodCampaignView extends StatelessWidget {
     return BlocBuilder<FoodCampaignCubit, FoodCampaignState>(
       builder: (context, state) => switch (state) {
         FoodCampaignInitial() || FoodCampaignLoading() => FoodCampaignShimmer(),
-        FoodCampaignError() => ErrorStateHandler(
-            child: FoodCampaignShimmer(),
+        FoodCampaignError error => ErrorStateHandler(
+            errorMessage: error.message,
+            child: FoodCampaignShimmer(
+              isAnimated: false,
+            ),
             onRetry: () => context.read<FoodCampaignCubit>().getFoodCampaigns(),
           ),
         FoodCampaignLoaded(:final campaigns) => ConstrainedBox(

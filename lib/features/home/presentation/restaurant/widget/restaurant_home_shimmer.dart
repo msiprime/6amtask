@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+import 'package:stackfood/core/global/effect/static_shimmer_effect.dart';
 import 'package:stackfood/features/home/domain/entity/restaurant_entity.dart';
 import 'package:stackfood/features/home/presentation/restaurant/widget/restaurant_item_card.dart';
 
-class RestaurantHomeShimmer extends StatelessWidget {
-  const RestaurantHomeShimmer({
-    super.key,
-  });
+class RestaurantShimmer extends StatelessWidget {
+  final bool useSliver;
+  final bool isAnimated;
+
+  const RestaurantShimmer(
+      {super.key, this.useSliver = true, this.isAnimated = true});
 
   @override
   Widget build(BuildContext context) {
-    return SliverToBoxAdapter(
-      child: Center(
-          child: Skeletonizer(
-        child: RestaurantItemCard(
-            restaurant: RestaurantEntity(
+    final shimmerWidget = Skeletonizer(
+      effect: isAnimated ? null : StaticShimmerEffect(),
+      child: RestaurantItemCard(
+        restaurant: RestaurantEntity(
           id: 0,
           name: "Restaurant Name",
           gstStatus: false,
@@ -82,8 +84,10 @@ class RestaurantHomeShimmer extends StatelessWidget {
           positiveRating: 0,
           scheduleAdvanceDineInBookingDuration: 0,
           scheduleAdvanceDineInBookingDurationTimeFormat: "",
-        )),
-      )),
+        ),
+      ),
     );
+
+    return useSliver ? SliverToBoxAdapter(child: shimmerWidget) : shimmerWidget;
   }
 }

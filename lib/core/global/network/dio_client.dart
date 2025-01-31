@@ -59,9 +59,9 @@ class DioClient {
       case DioExceptionType.cancel:
         return 'Request cancelled';
       case DioExceptionType.unknown:
-        return 'Unexpected error: ${error.message}';
+        return 'No internet!: ${error.message}';
       default:
-        return 'Unknown error';
+        return 'No internet or server error';
     }
   }
 }
@@ -73,6 +73,5 @@ class DioClientException implements Exception {
   DioClientException({required this.message, this.statusCode});
 
   @override
-  String toString() =>
-      'DioClientException: $message (Status code: $statusCode)';
+  String toString() => message;
 }

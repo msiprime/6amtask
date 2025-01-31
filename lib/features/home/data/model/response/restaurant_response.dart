@@ -1,4 +1,5 @@
 import 'package:stackfood/features/home/data/model/restaurant_model.dart';
+import 'package:stackfood/features/home/domain/entity/restaurant_response_entity.dart';
 
 class RestaurantResponse {
   String? filterData;
@@ -26,5 +27,17 @@ class RestaurantResponse {
         restaurants!.add(RestaurantModel.fromJson(v));
       });
     }
+  }
+}
+
+extension RestaurantResponseExtension on RestaurantResponse {
+  RestaurantResponseEntity toEntity() {
+    return RestaurantResponseEntity(
+      filterData: filterData ?? "",
+      totalSize: totalSize ?? 0,
+      limit: limit ?? "",
+      offset: offset ?? "",
+      restaurants: restaurants?.map((e) => e.toEntity()).toList() ?? [],
+    );
   }
 }

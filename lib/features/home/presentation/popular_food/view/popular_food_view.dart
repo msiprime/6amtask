@@ -18,7 +18,7 @@ class PopularFoodSection extends StatelessWidget {
       create: (context) => PopularFoodCubit(
         homeRepository: sl.get<HomeRepositoryImpl>(),
       )..getPopularFoodNearby(),
-      child: const PopularFoodView(),
+      child: SliverToBoxAdapter(child: const PopularFoodView()),
     );
   }
 }
@@ -48,8 +48,11 @@ class PopularFoodView extends StatelessWidget {
                 ),
               ),
             ),
-          PopularFoodError() => ErrorStateHandler(
-              child: const PopularFoodShimmer(),
+          PopularFoodError error => ErrorStateHandler(
+              errorMessage: error.message,
+              child: const PopularFoodShimmer(
+                isAnimated: false,
+              ),
               onRetry: () =>
                   context.read<PopularFoodCubit>().getPopularFoodNearby(),
             ),

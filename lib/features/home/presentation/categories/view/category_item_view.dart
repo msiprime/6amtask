@@ -17,7 +17,7 @@ class CategoryItemSection extends StatelessWidget {
       create: (context) =>
           HomeCategoryCubit(homeRepository: sl.get<HomeRepositoryImpl>())
             ..getHomeCategories(),
-      child: const CategoryItemView(),
+      child: SliverToBoxAdapter(child: const CategoryItemView()),
     );
   }
 }
@@ -43,8 +43,11 @@ class CategoryItemView extends StatelessWidget {
                 itemCount: state.categories.length,
               ),
             ),
-          HomeCategoryError() => ErrorStateHandler(
-              child: CategoryShimmerWidget(),
+          HomeCategoryError error => ErrorStateHandler(
+              errorMessage: error.message,
+              child: CategoryShimmerWidget(
+                isAnimated: false,
+              ),
               onRetry: () =>
                   context.read<HomeCategoryCubit>().getHomeCategories(),
             ),

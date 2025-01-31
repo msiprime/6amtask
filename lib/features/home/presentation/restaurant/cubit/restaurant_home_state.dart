@@ -1,40 +1,44 @@
 part of 'restaurant_home_cubit.dart';
 
 @immutable
-sealed class RestaurantHomeState extends Equatable {}
-
-final class RestaurantHomeInitial extends RestaurantHomeState {
-  @override
-  List<Object?> get props => [];
-}
-
-class RestaurantHomeLoading extends RestaurantHomeState {
-  @override
-  List<Object?> get props => [];
-}
-
-class RestaurantHomeLoaded extends RestaurantHomeState {
-  final List<RestaurantEntity> restaurants;
-  final bool hasReachedMax;
+class RestaurantHomeState extends Equatable {
+  final List<RestaurantEntity> restaurantList;
   final bool isLoading;
+  final bool hasMoreData;
+  final String errorMessage;
 
-  RestaurantHomeLoaded({
-    required this.restaurants,
-    required this.hasReachedMax,
-    this.isLoading = false,
+  const RestaurantHomeState({
+    required this.restaurantList,
+    required this.isLoading,
+    required this.hasMoreData,
+    required this.errorMessage,
   });
 
+  const RestaurantHomeState.initial()
+      : restaurantList = const [],
+        isLoading = false,
+        hasMoreData = true,
+        errorMessage = '';
+
+  RestaurantHomeState copyWith({
+    List<RestaurantEntity>? restaurantList,
+    bool? isLoading,
+    bool? hasMoreData,
+    String? errorMessage,
+  }) {
+    return RestaurantHomeState(
+      restaurantList: restaurantList ?? this.restaurantList,
+      isLoading: isLoading ?? this.isLoading,
+      hasMoreData: hasMoreData ?? this.hasMoreData,
+      errorMessage: errorMessage ?? this.errorMessage,
+    );
+  }
+
   @override
-  List<Object?> get props => [restaurants, hasReachedMax, isLoading];
-}
-
-class RestaurantHomeError extends RestaurantHomeState {
-  final String message;
-
-  RestaurantHomeError({
-    required this.message,
-  });
-
-  @override
-  List<Object?> get props => [message];
+  List<Object?> get props => [
+        restaurantList,
+        isLoading,
+        hasMoreData,
+        errorMessage,
+      ];
 }

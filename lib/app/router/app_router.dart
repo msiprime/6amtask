@@ -17,7 +17,6 @@ final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>(
   debugLabel: '_rootNavigatorKey',
 );
 
-/// The default app router.
 final GoRouter appRouter = GoRouter(
   initialLocation: '/${SplashScreen.routeName}',
   navigatorKey: _rootNavigatorKey,
@@ -60,21 +59,6 @@ StatefulShellRoute _buildShellRoutes() {
         ],
       ),
     ],
-  );
-}
-
-/// Clears all routes from the app router's stack and pushes the given
-/// [path].
-void clearAllRoutesAndGoToNamed(
-  String path, {
-  Object? extra,
-}) {
-  while (appRouter.canPop()) {
-    appRouter.pop();
-  }
-  appRouter.pushReplacementNamed(
-    path,
-    extra: extra,
   );
 }
 
@@ -138,6 +122,19 @@ GoRoute _buildMyProfileRoute() => GoRoute(
 
 /// /// /// Utility functions /// /// ///
 
+GoRouterPageBuilder _getDefaultPageBuilderByPlatform({
+  required Widget Function(
+    BuildContext context,
+    GoRouterState goRouterState,
+  ) childBuilder,
+}) =>
+    (context, goRouterState) => _getPageByPlatform(
+          child: childBuilder(
+            context,
+            goRouterState,
+          ),
+        );
+
 Page<T> _getPageByPlatform<T>({required Widget child}) {
   if (kIsWeb) {
     return MaterialPage(child: child);
@@ -151,16 +148,3 @@ Page<T> _getPageByPlatform<T>({required Widget child}) {
     return MaterialPage(child: child);
   }
 }
-
-GoRouterPageBuilder _getDefaultPageBuilderByPlatform({
-  required Widget Function(
-    BuildContext context,
-    GoRouterState goRouterState,
-  ) childBuilder,
-}) =>
-    (context, goRouterState) => _getPageByPlatform(
-          child: childBuilder(
-            context,
-            goRouterState,
-          ),
-        );

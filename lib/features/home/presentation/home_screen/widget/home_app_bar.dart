@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stackfood/core/global/constants/app_size.dart';
 import 'package:stackfood/core/global/constants/app_spacing.dart';
+import 'package:stackfood/core/global/constants/app_strings.dart';
 import 'package:stackfood/core/global/extension/context_extension.dart';
 import 'package:stackfood/core/global/theme/app_colors.dart';
 import 'package:stackfood/core/global/widgets/app_text_widget.dart';
@@ -15,8 +16,6 @@ class HomeAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverAppBar(
       elevation: 0,
-
-      /// This would obtain the behavior of Stack Food Mobile Demo I assume.
       // forceMaterialTransparency: true,
       scrolledUnderElevation: 0,
       forceElevated: false,
@@ -54,35 +53,32 @@ class _BottomSearchBarPart extends StatelessWidget {
         right: AppSpacing.md,
         bottom: AppSpacing.sm,
       ),
-      child: SearchAnchor(
-        suggestionsBuilder: (context, controller) => Future.value([]),
-        builder: (context, controller) => SearchBar(
-          controller: controller,
-          shadowColor: WidgetStatePropertyAll(AppColors.red),
-          scrollPadding: const EdgeInsets.all(AppSpacing.lg),
-          elevation: WidgetStatePropertyAll(0),
-          trailing: [
-            IconButton(
-              icon: const Icon(CupertinoIcons.search),
-              onPressed: () {},
-            ),
-          ],
-          shape: WidgetStatePropertyAll(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-          ),
-          padding: WidgetStatePropertyAll(
-              const EdgeInsets.symmetric(horizontal: AppSpacing.md)),
-          hintStyle: WidgetStatePropertyAll(
-            const TextStyle(
-              fontSize: 16,
-              color: AppColors.grey,
-            ),
-          ),
-          hintText: 'Search for food, restaurants, etc.',
-          backgroundColor: WidgetStatePropertyAll(Colors.white),
-        ),
+      child: TextFormField(
+        decoration: _buildInputDecoration(),
+      ),
+    );
+  }
+
+  InputDecoration _buildInputDecoration() {
+    return InputDecoration(
+      hintStyle: TextStyle(
+        color: AppColors.grey,
+        fontSize: AppSize.xs,
+      ),
+      hintText: AppStrings.searchForFoodRestaurant,
+      suffixIcon: const Icon(
+        CupertinoIcons.search,
+        color: AppColors.grey,
+      ),
+      filled: true,
+      fillColor: AppColors.white,
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(AppSize.xxxs),
+        borderSide: BorderSide.none,
+      ),
+      contentPadding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.lg,
+        vertical: AppSpacing.xxs,
       ),
     );
   }

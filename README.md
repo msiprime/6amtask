@@ -10,10 +10,12 @@ Follow these steps to set up and run the app on your local machine.
 
 Before you begin, ensure you have the following installed on your computer:
 
-- [Flutter](https://flutter.dev/docs/get-started/install) (Ensure you have Flutter SDK installed and configured correctly)
+- [Flutter](https://flutter.dev/docs/get-started/install) (Ensure you have Flutter SDK installed and
+  configured correctly)
 - [Dart](https://dart.dev/get-dart) (Dart is required by Flutter)
 - [Xcode](https://developer.apple.com/xcode/) (for iOS development, if you're on a Mac)
-- [Android Studio](https://developer.android.com/studio) or [Visual Studio Code](https://code.visualstudio.com/) (to edit and run the Flutter project)
+- [Android Studio](https://developer.android.com/studio)
+  or [Visual Studio Code](https://code.visualstudio.com/) (to edit and run the Flutter project)
 
 ## Installation
 
@@ -28,7 +30,7 @@ Before you begin, ensure you have the following installed on your computer:
     ```bash
     cd 6amtask
     ```
-   
+
 3. Install the dependencies:
 
     ```bash
@@ -39,15 +41,25 @@ Before you begin, ensure you have the following installed on your computer:
     ```bash
     flutter run
    ```
-   
+
 5. Run the app (on Web):
 
     ```bash
     flutter run -d chrome --web-renderer html
    ```
-   
 
+6. Build the app:
 
+    ```bash
+    flutter build apk --release
+   ```
+The Apk can be found in the build/app/outputs/flutter-apk directory
+
+## Screenshots
+
+### Home Screen
+
+[//]: # (![Home Screen]&#40;screenshots/home.png&#41;)
 
 ## API Endpoints Used
 
@@ -62,6 +74,7 @@ The app uses the following public API to fetch data:
 - **Restaurants**: `/api/v1/restaurants/get-restaurants/all?offset=1&limit=10` (Paginated)
 
 #### Headers for API calls:
+
 ```json
 {
   "Content-Type": "application/json; charset=UTF-8",
