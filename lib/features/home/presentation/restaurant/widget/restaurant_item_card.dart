@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stackfood/core/global/constants/app_size.dart';
 import 'package:stackfood/core/global/constants/app_spacing.dart';
 import 'package:stackfood/core/global/extension/context_extension.dart';
+import 'package:stackfood/core/global/widgets/app_text_widget.dart';
 import 'package:stackfood/core/global/widgets/custom_rating_widget.dart';
 import 'package:stackfood/core/global/widgets/image_thumbnail.dart';
 import 'package:stackfood/features/home/domain/entity/restaurant_entity.dart';
@@ -62,24 +63,17 @@ class RestaurantItemCard extends StatelessWidget {
                 ),
                 overflow: TextOverflow.fade,
               ),
-              RatingStars(rating: restaurant.avgRating),
+              FittedBox(
+                child: RatingStars(
+                  rating: restaurant.avgRating,
+                ),
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    children: [
-                      /// We could make it double, (AS PER UI, I am keeping it as it is)
-                      Text(
-                        '\$ ${"10"}',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                      ),
-                      const SizedBox(width: 6),
-                    ],
-                  ),
+                  Expanded(
+                      child: AppText('\$ ${"10"}',
+                          style: AppTextStyle.titleMedium)),
                   IconButton(
                     style: ButtonStyle(
                       visualDensity: VisualDensity.compact,
