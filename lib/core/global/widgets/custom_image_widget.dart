@@ -1,15 +1,9 @@
-// ignore_for_file: public_member_api_docs
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:stackfood/core/global/widgets/shimmer_placeholder.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import 'package:stackfood/core/global/widgets/thumbnail_error.dart';
 
-/// {@template image_attachment_thumbnail}
-/// Widget for building image attachment thumbnail.
-/// {@endtemplate}
 class CustomImageWidget extends StatelessWidget {
-  /// {@macro image_attachment_thumbnail}
   const CustomImageWidget({
     required this.imageUrl,
     super.key,
@@ -27,46 +21,32 @@ class CustomImageWidget extends StatelessWidget {
     this.errorBuilder = _defaultErrorBuilder,
   });
 
-  /// The scale of the image.
   final double scale;
 
-  /// The image url to show.
   final String imageUrl;
 
-  /// Width of the attachment image thumbnail.
   final double? width;
 
-  /// Height of the attachment image thumbnail.
   final double? height;
 
-  /// Memory width of the attachment image thumbnail.
   final int? memCacheWidth;
 
-  /// Memory height of the attachment image thumbnail.
   final int? memCacheHeight;
 
-  /// Resize width of the attachment image thumbnail.
   final int? resizeWidth;
 
-  /// rEsize height of the attachment image thumbnail.
   final int? resizeHeight;
 
-  /// The border radius of the image.
   final BorderRadiusGeometry? borderRadius;
 
-  /// Fit of the attachment image thumbnail.
   final BoxFit? fit;
 
-  /// Whether to show a default shimmer placeholder when image is loading.
   final bool withPlaceholder;
 
-  /// Whether the shimmer placeholder should use adaptive colors.
   final bool withAdaptiveColors;
 
-  /// Builder used when the thumbnail fails to load.
   final ThumbnailErrorBuilder errorBuilder;
 
-  // Default error builder for image attachment thumbnail.
   static Widget _defaultErrorBuilder(
     BuildContext context,
     Object error,
@@ -169,14 +149,22 @@ class NetworkImageAttachment extends StatelessWidget {
       },
       placeholder: !withPlaceholder
           ? null
-          : (context, __) => ShimmerPlaceholder.rectangle(
+          : (context, __) => Skeletonizer(
+                  child: Container(
                 height: height,
                 width: width,
-                highlightColorLight: Colors.grey[300],
-                baseColorLight: Colors.grey[100],
-                withAdaptiveColors: withAdaptiveColors,
-                borderRadius: borderRadius,
-              ),
+                decoration: BoxDecoration(
+                  borderRadius: borderRadius,
+                  color: Colors.white,
+                ),
+                child: ClipRRect(
+                  borderRadius: borderRadius ?? BorderRadius.zero,
+                  child: Image.asset(
+                    'assets/images/placeholder.png',
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              )),
       errorWidget: (context, url, error) {
         return errorBuilder(
           context,

@@ -1,5 +1,3 @@
-// ignore_for_file: public_member_api_docs
-
 import 'package:flutter/material.dart';
 
 typedef ThumbnailErrorBuilder = Widget Function(
@@ -11,11 +9,7 @@ typedef ThumbnailErrorBuilder = Widget Function(
   BorderRadiusGeometry? borderRadius,
 });
 
-/// {@template thumbnailError}
-/// A widget that shows an error state when a thumbnail fails to load.
-/// {@endtemplate}
 class ThumbnailError extends StatelessWidget {
-  /// {@macro thumbnailError}
   const ThumbnailError({
     required this.error,
     super.key,
@@ -26,22 +20,16 @@ class ThumbnailError extends StatelessWidget {
     this.fit,
   });
 
-  /// The width of the thumbnail.
   final double? width;
 
-  /// The height of the thumbnail.
   final double? height;
 
-  /// The border radius of the thumbnail.
   final BorderRadiusGeometry? borderRadius;
 
-  /// How to inscribe the thumbnail into the space allocated during layout.
   final BoxFit? fit;
 
-  /// The error that triggered this error widget.
   final Object error;
 
-  /// The stack trace of the error that triggered this error widget.
   final StackTrace? stackTrace;
 
   @override

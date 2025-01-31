@@ -3,7 +3,7 @@ import 'package:stackfood/core/global/constants/app_size.dart';
 import 'package:stackfood/core/global/constants/app_spacing.dart';
 import 'package:stackfood/core/global/theme/app_colors.dart';
 import 'package:stackfood/core/global/widgets/app_text_widget.dart';
-import 'package:stackfood/core/global/widgets/image_thumbnail.dart';
+import 'package:stackfood/core/global/widgets/custom_image_widget.dart';
 import 'package:stackfood/features/home/domain/entity/category_entity.dart';
 
 class CategoryItem extends StatelessWidget {
@@ -31,8 +31,8 @@ class CategoryItem extends StatelessWidget {
                   borderRadius: BorderRadius.circular(AppSpacing.lg),
                   boxShadow: const [
                     BoxShadow(
-                        color: AppColors.grey,
-                        blurRadius: 2,
+                        color: AppColors.lightGrey,
+                        blurRadius: 1,
                         offset: Offset(0, 2)),
                   ],
                 ),

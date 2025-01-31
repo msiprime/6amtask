@@ -3,8 +3,8 @@ import 'package:stackfood/core/global/constants/app_size.dart';
 import 'package:stackfood/core/global/constants/app_spacing.dart';
 import 'package:stackfood/core/global/theme/app_colors.dart';
 import 'package:stackfood/core/global/widgets/app_text_widget.dart';
+import 'package:stackfood/core/global/widgets/custom_image_widget.dart';
 import 'package:stackfood/core/global/widgets/custom_rating_widget.dart';
-import 'package:stackfood/core/global/widgets/image_thumbnail.dart';
 import 'package:stackfood/features/home/domain/entity/restaurant_entity.dart';
 
 class RestaurantItemCard extends StatelessWidget {

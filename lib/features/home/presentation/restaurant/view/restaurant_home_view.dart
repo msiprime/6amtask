@@ -6,6 +6,7 @@ import 'package:stackfood/core/global/constants/app_spacing.dart';
 import 'package:stackfood/core/global/constants/app_strings.dart';
 import 'package:stackfood/features/home/data/repository/home_repo_impl.dart';
 import 'package:stackfood/features/home/presentation/restaurant/cubit/restaurant_home_cubit.dart';
+import 'package:stackfood/features/home/presentation/restaurant/widget/error_restaurant_widget.dart';
 import 'package:stackfood/features/home/presentation/restaurant/widget/restaurant_home_shimmer.dart';
 import 'package:stackfood/features/home/presentation/restaurant/widget/restaurant_item_card.dart';
 
@@ -69,7 +70,7 @@ class RestaurantHomeCardViewState extends State<RestaurantHomeCardView> {
         }
 
         if (state.errorMessage.isNotEmpty && state.restaurantList.isEmpty) {
-          return _buildErrorWidget();
+          return ErrorRestaurantWidget();
         }
 
         return SliverList(
@@ -99,22 +100,9 @@ class RestaurantHomeCardViewState extends State<RestaurantHomeCardView> {
         child: Center(
             child: Column(
           children: [
-            Text("No more restaurants available"),
+            Text(AppStrings.noMoreRestaurant),
             Gap(100),
           ],
         )),
-      );
-
-  Widget _buildErrorWidget() => SliverToBoxAdapter(
-        child: Center(
-          child: FilledButton.tonalIcon(
-            style: ButtonStyle(visualDensity: VisualDensity.compact),
-            onPressed: () => context
-                .read<RestaurantHomeCubit>()
-                .getRestaurants(isRefresh: true),
-            label: Text(AppStrings.retry),
-            icon: const Icon(Icons.refresh_sharp),
-          ),
-        ),
       );
 }

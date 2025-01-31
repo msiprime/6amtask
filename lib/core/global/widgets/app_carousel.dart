@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:stackfood/core/global/extension/context_extension.dart';
-import 'package:stackfood/core/global/widgets/image_thumbnail.dart';
+import 'package:stackfood/core/global/widgets/custom_image_widget.dart';
 
 class AppCarouselSlider extends StatelessWidget {
   final List<String> imageUrls;

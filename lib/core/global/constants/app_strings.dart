@@ -27,4 +27,7 @@ abstract class AppStrings {
 
   /// Buttons
   static const String retry = 'Retry';
+
+  /// pagination
+  static const String noMoreRestaurant = 'No more restaurant found!';
 }

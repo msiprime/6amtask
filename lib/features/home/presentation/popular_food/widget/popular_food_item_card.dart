@@ -3,7 +3,7 @@ import 'package:stackfood/core/global/constants/app_size.dart';
 import 'package:stackfood/core/global/constants/app_spacing.dart';
 import 'package:stackfood/core/global/theme/app_colors.dart';
 import 'package:stackfood/core/global/widgets/app_text_widget.dart';
-import 'package:stackfood/core/global/widgets/image_thumbnail.dart';
+import 'package:stackfood/core/global/widgets/custom_image_widget.dart';
 import 'package:stackfood/features/home/domain/entity/popular_product_entity.dart';
 
 class PopularFoodItemCard extends StatelessWidget {
