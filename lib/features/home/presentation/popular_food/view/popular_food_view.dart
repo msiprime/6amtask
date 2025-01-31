@@ -36,7 +36,7 @@ class PopularFoodView extends StatelessWidget {
             const PopularFoodShimmer(),
           PopularFoodLoaded(:final popularProducts) => ConstrainedBox(
               constraints:
-                  BoxConstraints(maxHeight: context.isDesktop ? 250 : 200),
+                  BoxConstraints(maxHeight: context.isDesktop ? 250 : 210),
               child: ListView.builder(
                 itemCount: popularProducts.length,
                 scrollDirection: Axis.horizontal,

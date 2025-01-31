@@ -28,7 +28,7 @@ class PopularFoodItemCard extends StatelessWidget {
               children: [
                 Expanded(
                   child: ImageContainer(
-                    itemHeight: itemHeight * 0.5,
+                    itemHeight: itemHeight * 0.45,
                     itemWidth: itemWidth,
                     popularFood: popularFood,
                   ),
@@ -97,8 +97,8 @@ class InfoContainer extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.white,
         borderRadius: const BorderRadius.only(
-          bottomLeft: Radius.circular(AppSpacing.lg),
-          bottomRight: Radius.circular(AppSpacing.lg),
+          bottomLeft: Radius.circular(AppSize.xs),
+          bottomRight: Radius.circular(AppSize.xs),
         ),
         boxShadow: [
           BoxShadow(
@@ -116,14 +116,12 @@ class InfoContainer extends StatelessWidget {
             popularFood.name,
             style: AppTextStyle.titleMedium,
             fontWeight: FontWeight.w500,
-            maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
           AppText(
             popularFood.restaurantName,
             style: AppTextStyle.titleSmall,
             color: AppColors.grey,
-            maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
           Row(

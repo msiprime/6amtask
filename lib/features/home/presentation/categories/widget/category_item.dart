@@ -47,7 +47,6 @@ class CategoryItem extends StatelessWidget {
               const SizedBox(height: AppSpacing.md),
               AppText(
                 category.name,
-                overflow: TextOverflow.ellipsis,
                 textAlign: TextAlign.center,
                 style: AppTextStyle.labelLarge,
               ),

@@ -23,10 +23,12 @@ class HomeTitleSectionWithViewAll extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          AppText(
-            title,
-            style: AppTextStyle.titleMedium,
-            fontWeight: FontWeight.w600,
+          Expanded(
+            child: AppText(
+              title,
+              style: AppTextStyle.titleMedium,
+              fontWeight: FontWeight.w600,
+            ),
           ),
           TextButton(
             style: TextButton.styleFrom(
