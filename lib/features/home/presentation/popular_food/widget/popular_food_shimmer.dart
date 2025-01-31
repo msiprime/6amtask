@@ -17,7 +17,7 @@ class PopularFoodShimmer extends StatelessWidget {
         child: ConstrainedBox(
           constraints: BoxConstraints(maxHeight: context.isDesktop ? 250 : 210),
           child: ListView.builder(
-            itemCount: 5,
+            itemCount: 10,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) => Padding(
               padding: const EdgeInsets.only(left: AppSpacing.sm),
