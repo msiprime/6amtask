@@ -36,17 +36,9 @@ class CategoryModel {
   CategoryModel.fromJson(Map<String, dynamic> json) {
     id = json['id'] as int?;
     name = json['name'] as String?;
-    // image = json['image'];
-    // parentId = json['parent_id'];
-    // position = json['position'];
     status = json['status'] as int?;
-    // createdAt = json['created_at'];
-    // updatedAt = json['updated_at'];
     priority = json['priority'] as int?;
     slug = json['slug'] as String?;
-    // productsCount = json['products_count'];
-    // childesCount = json['childes_count'];
-    // orderCount = json['order_count'];
     imageFullUrl = json['image_full_url'] as String?;
   }
 }

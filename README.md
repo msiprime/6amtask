@@ -57,9 +57,15 @@ The Apk can be found in the build/app/outputs/flutter-apk directory
 
 ## Screenshots
 
+Here are some screenshots of the app to give you a preview of its user interface:
+
 ### Home Screen
 
-[//]: # (![Home Screen]&#40;screenshots/home.png&#41;)
+![Home Screen](assets/screenshots/homepage.png)
+
+### Popular Food Section
+
+![Popular Food Section](assets/screenshots/homepage_rest.png)
 
 ## API Endpoints Used
 
