@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,6 +10,7 @@ part 'home_banner_state.dart';
 
 class HomeBannerCubit extends Cubit<HomeBannerState> {
   final HomeRepository _homeRepository;
+  late final StreamSubscription<List<BannerEntity>> _bannerSubscription;
 
   HomeBannerCubit({
     required HomeRepository homeRepository,
